@@ -1,2 +1,4 @@
 # LCC
-Laboratorio de Compuntación 100tifika
+Laboratorio de Compuntación Científica
+
+Manual y ejercicios en Matlab y Python
