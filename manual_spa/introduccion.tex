@@ -1,0 +1,284 @@
+\chapter{Introducción al software científico}
+En la actualidad, el ordenador se ha convertido en una herramienta imprescindible para el trabajo de cualquier investigador científico. Su uso ha permitido realizar tareas que sin su ayuda resultarían sencillamente imposibles de acometer. Entre otras, distinguiremos las tres siguientes:
+\begin{itemize}
+\item Adquisición de datos de dispositivos experimentales.
+\item Análisis y tratamiento de datos experimentales. \index{Datos, análisis}
+\item Cálculo Ciéntifico.
+\end{itemize}
+
+La primera de éstas tareas queda fuera de los contenidos de esta asignatura. Su objetivo es emplear el ordenador para recoger datos automáticamente de los sensores empleados en un dispositivo experimental. El procedimiento habitual es emplear dispositivos electrónicos que traducen las lecturas de un sensor (un termómetro, un manómetro, un caudalímetro, una cámara etc.) a un voltaje. El voltaje es digitalizado, es decir, convertido a una secuencia de ceros y unos, y almacenado en un ordenador para su posterior análisis o/y directamente monitorizado, es decir, mostrado en la pantalla del ordenador. En muchos casos el ordenador es a su vez capaz de interactuar con el dispositivo experimental: iniciar o detener un experimento, regular las condiciones en que se realiza, disparar alarmas si se producen errores, etc.
+
+De este modo, el investigador científico, queda dispensado de la tarea de adquirir por sí mismo los datos experimentales. Tarea que en algunos casos resultaría imposible, por ejemplo si necesita medir muchas variables a la vez o si debe medirlas a gran ritmo; y en la que, en general, es relativamente fácil cometer errores.
+
+El análisis y tratamiento de datos experimentales, constituye una tarea fundamental dentro del trabajo de investigación científica. Los ordenadores permiten realizar dichas tareas, de una forma eficiente y segura con cantidades de datos que resultarían imposibles de manejar hace 50 años. Como veremos más adelante, una simple hoja de cálculo puede ahorrarnos una cuantas horas de cálculos tediosos. El análisis estadístico de un conjunto de datos experimentales, el cálculo --la estimación-- de los errores experimentales cometidos, la posterior regresión de los datos obtenidos a una función matemática que permita establecer una ley o al menos una relación entre los datos obtenidos, formar parte del trabajo cotidiano del investigador, virtualmente en todos los campos de la ciencia.
+
+Por último el cálculo. \index{Cálculo numérico} Cabría decir que constituye el núcleo del trabajo de investigación. El científico trata de explicar la realidad que le rodea, mediante el empleo de una descripción matemática. Dicha descripción suele tomar la forma de un modelo matemático más o menos complejo. La validez de un modelo está ligada a que sea capaz de reproducir los resultados experimentales obtenidos del fenómeno que pretende explicar. Si el modelo es bueno será capaz de obtener mediante cálculo unos resultados similares a los obtenido mediante el experimento. De este modo, el modelo queda validado y es posible emplearlo para predecir cómo se comportará el sistema objeto de estudio en otras condiciones.
+
+\section{Introducción a los computadores} \index{Computador} \index{Ordenador}
+Más o menos todos estamos familiarizados con lo que es un computador, los encontramos a diario continuamente  y, de hecho, hay muchos aspectos de nuestra vida actual que serían inimaginables sin los computadores.  En términos muy generales, podemos definir un computador como una máquina que es capaz de recibir instrucciones y realizar operaciones (cálculos) a partir de las instrucciones recibidas. Precisamente es la capacidad de recibir instrucciones lo que hace del ordenador una herramienta versátil; según las instrucciones recibidas y de acuerdo también a sus posibilidades como máquina,  el ordenador puede realizar tareas muy distintas, entre las que cabe destacar como más generales, las siguientes:
+\begin{itemize}
+\item Procesamiento de datos 
+\item Almacenamiento de datos
+\item Transferencias de datos entre el computador y el exterior
+\item Control de las anteriores operaciones
+\end{itemize}
+
+El computador se diseña para realizar funciones generales que se especifican cuando se programa. La programación es la que concreta las tareas que efectivamente realiza un ordenador concreto.
+
+\subsection{Niveles de descripción de un ordenador}
+
+La figura \ref{fig:nivel} muestra un modelo general de un computador descrito por niveles. Cada nivel, supone y se apoya en el nivel anterior. 
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=10cm]{nivel_descripcion.pdf}
+	\caption{Descripción por niveles de un computador}
+	\label{fig:nivel}
+\end{figure}
+\begin{enumerate}
+\item \textbf{Nivel Físico.} Constituye la base del \emph{hardware} del computador. Está constituido por los componentes electrónicos básicos, diodos, transistores, resistencias, etc.  En un computador moderno, no es posible separar o tan siquiera observar dichos componentes: Se han fabricado directamente sobre un cristal semiconductor, y forman parte de un dispositivo electrónico conocido con el nombre de circuito integrado.
+
+\item \textbf{Circuito Digital.}
+Los componentes del nivel físico se agrupan formando circuitos digitales, (En nuestro caso circuitos digitales integrados). Los circuitos digitales trabajan solo con dos niveles de tensión ($V_1, V_0$) lo que permite emplearlos para establecer relaciones lógicas: $V_1$=verdadero, $V_2$=falso. Estas relaciones lógicas establecidas empleando los valores de la tensión de los circuitos digitales constituyen el soporte de todos los cálculos que el computador puede realizar.
+
+\item \textbf{Organización Hardware del sistema.}\index{Computador ! \emph{hardware}} 
+Los circuitos digitales integrados se agrupan y organizan para formar el \emph{Hardware} del ordenador.  Los módulos básicos que constituyen el \emph{Hardware} son la unidad central de procesos (CPU), La unidad de memoria y las unidades de entrada y salida de datos. Dichos componentes están conectados entre sí mediante un bus, que transfiere datos de una unidad a otra.
+
+\item \textbf{Arquitectura del computador.} \index{Computador ! arquitectura}
+La arquitectura define cómo trabaja el computador. Por tanto, está estrechamente relacionada con la organización hardware del sistema, pero opera a un nivel de abstracción superior. Establece cómo se accede a los registros de memoria, arbitra el uso de los buses que comunican unos componentes con otros, y regula el trabajo de la CPU.  
+
+Sobre la arquitectura se establece el lenguaje básico en el que trabaja el ordenador, conocido cómo lenguaje máquina. Es un lenguaje que emplea todavía niveles lógicos binarios (ceros o unos) y por tanto no demasiado apto para ser interpretado por los seres humanos. Este lenguaje permite al ordenador realizar operaciones básicas como copiar el contenido de un registro de memoria en otro, sumar el contenido de dos registros de memoria, etc. 
+
+El lenguaje máquina es adecuado para los computadores, pero no para los humanos, por eso, los fabricantes suministran junto con el computador un repertorio básico de instrucciones que su máquina puede entender y realizar en un lenguaje algo más asequible. Se trata del lenguaje ensamblador. Los comandos de éste lenguaje son fácilmente traducibles en una o varias instrucciones de lenguaje máquina.   Aún así se trata de un lenguaje en el que programar directamente resulta una tarea tediosa y proclive a cometer errores. 
+
+\item \textbf{Compiladores y Sistemas Operativos} \index{Sistema operativo} \index{Compilador}
+Los Compiladores constituyen un tipo de programas especiales que permiten convertir un conjunto de instrucciones, escritas en un lenguaje de alto nivel en lenguaje máquina. El programador escribe sus instrucciones en un fichero de texto normal, perfectamente legible para el ser humano, y el compilador convierte las instrucciones contenidas en dicho fichero en secuencias binarias comprensibles por la máquina.
+
+Los computadores primitivos solo eran capaces de ejecutar un programa a la vez. A medida que se fueron fabricando ordenadores mas sofisticados, surgió la idea de crear programas que se encargaran de las tareas básicas: gestionar el flujo de información, manejar periféricos, etc. Estos programas reciben el nombre de sistemas operativos. Los computadores modernos cargan al arrancar un sistema operativo que controla la ejecución del resto de las aplicaciones. Ejemplos de sistemas operativos son DOS (Disk Operating System), Unix y su versión para ordenadores personales Linux.
+
+\item \textbf{Lenguajes de alto nivel.} \index{Programación! lenguajes}
+Los lenguajes de alto nivel están pensados para facilitar la tarea del programador, desentendiéndose de los detalles de implementación del hardware del ordenador.  Están compuestos por un conjunto de comandos y unas reglas sintácticas, que permiten describir las instrucciones para el computador en forma de texto.
+
+De una manera muy general, se pueden dividir los lenguajes de alto nivel en lenguajes compilados y lenguajes interpretados. Los lenguajes compilados emplean un compilador para convertir los comandos del lenguaje de alto nivel en lenguaje máquina. Ejemplos de lenguajes compilados son C , C++ y Fortran. Los lenguajes interpretados a diferencia de los anteriores no se traducen a lenguaje máquina antes de ejecutarse. Si no que utilizan otro programa --el interprete-- que va leyendo los comandos del lenguaje y convirtiéndolos en instrucciones máquina a la vez que el programa se va ejecutando. Ejemplos de programas interpretado son Basic, Python y Java.
+
+\item \textbf{Aplicaciones.} \index{Programación! aplicaciones} Se suele entender por aplicaciones programas orientados a tareas específicas, disponibles para un usuario final. Habitualmente se trata de programas escritos en un lenguaje de alto nivel y presentados en un formato fácilmente comprensible para quien los usa.
+
+Existen multitud de aplicaciones, entre las más conocidas cabe incluir los navegadores para Internet, como Explorer, Mocilla o Google Crome, los editores de texto, como Word, las hojas de cálculo como Excel o los clientes de correo como Outlook. En realidad, la lista de aplicaciones disponibles en el mercado sería interminable. 
+\end{enumerate}
+\subsection{El modelo de computador de Von Neumann} \index{Von Neumann}
+Los computadores modernos siguen, en lineas generales, el modelo propuesto por Von Newmann.  La figura \ref{fig:vonn} muestra un esquema de dicho modelo. 
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=10cm]{von.pdf}
+	\caption{Modelo de Von Neumann}
+	\label{fig:vonn}
+\end{figure}
+
+En el modelo de Von Newman se pueden  distinguir tres módulos básicos y una serie de elementos de interconexión.  Los módulos básicos son: 
+
+\begin{itemize}
+\item \textbf{La Unidad Central de Procesos.} CPU \index{CPU} (\emph{Central process unit)}) , esta unidad constituye el núcleo en el que el ordenador realiza las operaciones. 
+
+Dentro de la CPU pueden a su vez distinguirse las siguientes partes
+
+\begin{itemize}
+
+\item La unidad de proceso ó ruta de datos: Está formada por La Unidad Aritmético Lógica (ALU), \index{ALU} capaz de realizar las operaciones aritméticas y lógicas que indican las instrucciones del programa. En general las ALUs se construyen para realizar aritmética entre enteros, y realizar las operaciones lógicas básicas del algebra de Boole (AND, OR, etc). Habitualmente, las operaciones para números no enteros, representados en \emph{punto flotante} se suelen realizar empleando un procesador específico que se conoce con el nombre de Coprocesador matemático. La velocidad de procesamiento suele medirse en millones de operaciones por segundo (MIPS) o millones de operaciones en punto flotante por segundo (MFLOPS).
+
+\item El banco de registros: Conjunto de registros en los que se almacenan los datos con los que trabaja la ALU y los resultados obtenidos.
+ 
+\item La unidad de control (UC) o ruta de control: se encarga de buscar las instrucciones en la memoria principal y guardarlas en el registro de instrucciones, las decodifica, las ejecuta empleando la ALU, guarda los resultados en el registro de datos, y guarda las condiciones derivadas de la operación realizada en el registro de estado.  El registro de datos de memoria, contiene los datos que se están leyendo de la memoria principal o van a escribirse en la misma. El registro de direcciones de memoria, guarda la dirección de la memoria principal a las que esta accediendo la ALU, para leer o escribir. El contador del programa, también conocido como puntero de instrucciones, es un registro que guarda la posición en la que se encuentra la CPU dentro de la secuencia de instrucciones de un programa.
+\end{itemize}
+ 
+
+\item \textbf{La unidad de memoria.} Se trata de la memoria principal o primaria del computador.  Está dividida en bloques de memoria que se identifican mediante una dirección. La CPU tiene acceso directo a dichos bloques de memoria.
+
+La unidad elemental de información digital es el bit \index{bit} (0,1). La capacidad de almacenamiento de datos se mide en Bytes \index{Byte} y en sus múltiplos, calculados  como potencias de 2\footnote{Los prefijos $K$(Kilo),$M$(Mega),$G$ (Giga), etc., se reservan en el sistema internacional para indicar potencias de 10. Para su equivalente en potencias de 2 se deben emplear los términos $Ki$ (Kibi), $Mi$ (Mebi),$Gi$ (Gibi),$Ti$,(Tebi). Por tanto, debería decirse  Kibibyte, Mebibyte, etc. Sin embargo, esta notación no está muy extendida y se habla de KB (KiloBytes), MB (Megabytes), etc aunque se realice el cálculo en potencias de 2 }
+
+\begin{align} \nonumber
+1\  Byte = &\ 8\ bits\ &\  \\ \nonumber
+1\  Word = &\ 16\ bits=2B &\  \\ \nonumber
+1\  KiB  = &\ 2^{10}\ bits=1024\ B&\ \\  \nonumber
+1\  MiB = &\ 2^{20}\ bits=1024\ KB&\ \\  \nonumber
+1\  GiB = &\ 2^{30}\ bits &\ \\  \nonumber
+1\  TiB  = &\ 2^{40}\ bits\ &\
+\end{align} 
+
+\item \textbf{Unidad de Entrada/Salida.} Transfiere información entre el computador y los dispositivos periféricos.
+\end{itemize}
+
+Los elementos de interconexión se conocen con el nombre de \emph{Buses}. Se pueden distinguir tres: En bus de datos, por el que se transfieren datos entre la CPU y la memoria ó la unidad de entrada/salida. El bus de direcciones, par especificar una dirección de memoria o del registro de E/S. Y el bus de Control, por el que se envían señales de control, tales como la señal de reloj, la señal de control de lectura/escrituras entre otras.  
+
+\subsection{Representación binaria} \index{Base 2}
+Veamos con algo más de detalle, cómo representa la información un computador. Como se explicó anteriormente, La electrónica que constituye la parte física del ordenador, trabaja con dos niveles de voltaje. Esto permite definir dos estados, --alto, bajo-- que pueden representarse dos símbolos  $0$ y $1$. Habitualmente, empleamos $10$ símbolos ${0,1,2,3,4,5,6,7,8,9}$, es decir, empleamos una representación decimal. Cuando queremos representar números mayores que nueve, dado que hemos agotado el número de dígitos disponibles, lo que hacemos es combinarlos, agrupando cantidades de diez en diez. Así por ejemplo, el numero $16$, representa seis unidades más un grupo de diez unidades y el número $462$ representa dos unidades más seis grupos de diez unidades más cuatro grupos de 10 grupos de 10 unidades.  Matemáticamente, esto es equivalentes a emplear sumas de dígitos por potencias de diez:
+\begin{equation*}
+13024 = 1\times10^4+3\times10^3+0\times10^2+2\times10^1+4\times10^0 
+\end{equation*}
+
+Si recorremos los dígitos que componen el número de izquierda derecha, cada uno de ellos representa una potencia de diez superior, porque cada uno representa la cantidad de grupos de 10 grupos, de grupos ... de diez grupos de unidades. Esto hace que potencialmente podamos representar cantidades tan grandes como queramos, empleando tan solo diez símbolos. Esta representación, a la que estamos habituados recibe el nombre de representación en base 10 \index{Base 10}. Pero no es la única posible.
+
+Volvamos a la representación empleada por el computador. En este caso solo tenemos dos símbolos distintos el $0$ y el $1$. Si queremos emplear una representación análoga a la representación en base diez, deberemos agrupar ahora las cantidad en grupos de dos. Así los únicos números que admiten ser representados con un solo dígito son el uno y el cero. Para representar el número dos, necesitamos agrupar: tendremos $0$ unidades y $1$ grupo de dos, con lo que la representación del número dos en base dos será $10$. Para representar el número tres, tendremos una unidad más un grupo de dos, por lo que la representación será $11$, y así sucesivamente. Matemáticamente esto es equivalente emplear sumas de dígitos por potencias de 2:
+
+\begin{equation*}
+10110 = 1\times2^4+0\times2^3+1\times2^2+1\times2^1+0\times2^0 
+\end{equation*}
+
+Esta representación recibe el nombre de representación binaria o en base 2.
+\index{Conversión! binario a decimal}La expansión de un número representado en binario en potencias de 2, nos da un método directo de obtener su representación decimal. Así, para el ejemplo anterior, si calculamos las potencias de dos y sumamos los resultados obtenemos:
+
+  \begin{equation*}
+  1\times2^4+0\times2^3+1\times2^2+1\times2^1+0\times2^0=16+0+4+2+0=22 
+\end{equation*}
+
+que es la representación en base 10 del número binario $10110$.
+
+Para números no enteros, la representación tanto en decimal como en binario, se extiende de modo natural empleando potencias negativas de 10 y de 2 respectivamente. Así,
+ 
+\begin{equation} \nonumber
+835.41 = 8\times10^2+3\times10^1+5\times10^0+4\times10^{-1}+1\times10^{-2} 
+\end{equation}
+
+y para un número en binario,
+
+\begin{equation} \nonumber
+101.01 = 1\times2^2+0\times2^1+1\times2^0+0\times2^{-1}+1\times2^{-2} 
+\end{equation}
+
+De nuevo, basta calcular el término de la derecha de la expresión anterior para obtener la representación decimal del número $101.01$.
+
+\index{Conversión! decimal a binario. números enteros}¿Cómo transformar la representación de un número de decimal a binario? De nuevo nos da la clave la representación en sumas de productos de dígitos por potencias de dos. Empecemos por el caso de un número entero. Supongamos un número D, representado en decimal. Queremos expandirlo en una suma de potencias de dos. Si dividimos el número por 2, podríamos representarlo cómo:
+ 
+\begin{equation*}
+\label{eq:1}
+D=2\cdot C_1+R_1
+\end{equation*}
+
+donde $C_1$ representa el cociente de la división y $R_1$ el resto. Como estamos dividiendo por dos, el resto solo puede valer cero o uno. Supongamos ahora que volvemos a dividir el cociente obtenido por dos,
+
+ \begin{equation*}
+ \label{eq:2}
+C_1=2\cdot C_2+R_2 \
+\end{equation*}
+
+Si sustituimos el valor obtenido para $C_1$ en la ecuación inicial obtenemos,   
+\begin{equation*}
+D=2\cdot(2\cdot C_2+R_2)+R_1= 2^2\cdot C_2+R_2\cdot 2^1+R_1\cdot 2^0 
+\end{equation*}
+
+Si volvemos a dividir el nuevo cociente obtenido $C_2$ por dos, y volvemos a sustituir,
+
+ \begin{align*}
+C_2&=2\cdot C_3+R_3 \\
+D&=2^2\cdot(2\cdot C_3+R_3)+R_2\cdot 2^1+R_1\cdot 2^0=2^3\cdot C_3+R_3\cdot 2^2 +R_2\cdot 2^1+R_1\cdot 2^0
+\end{align*}
+
+Supongamos que tras repetir este proceso $n$ veces, obtenemos un conciente $C_n=1$. Lógicamente no tiene sentido seguir dividiendo ya que a partir de este punto, cualquier división posterior que hagamos nos dará cociente $0$ y resto igual a $C_n$. Por tanto, 
+
+ \begin{align*}
+D&=1\cdot 2^n+R_n\cdot 2^{n-1}\cdots +R_3\cdot 2^2 +R_2\cdot 2^1+R_1\cdot 2^0
+\end{align*}
+
+La expresión obtenida, coincide precisamente con la expansión en potencias de dos del número binario $1R_n \cdots R_3R_2R_1$.
+
+
+Como ejemplo,podemos obtener la representación en binario del número $234$, empleando el método descrito: vamos dividiendo el número y los cocientes sucesivos entre dos, hasta obtener un cociente igual a uno y a continuación, construimos la representación binaria del número colocando por orden, de derecha a izquierda.  los restos  obtenidos de las sucesivas divisiones y añadiendo un uno más a la izquierda de la cifra construida con los restos:
+
+\begin{table}[h]
+\begin{tabular}{|r|r|r|r|}
+Dividendo& &Cociente $\div 2$&Resto\\
+\hline
+234& &117&0\\
+117& &58&1\\
+58& &29&0\\
+29& &14&1\\
+14& &7&0\\
+7& &3&1\\
+3& &1&1
+\end{tabular}
+\end{table}
+ 
+ Por tanto, la representación en binario de 234 es 11101010.
+ 
+\index{Conversión! decimal a binario, números no entero}Supongamos ahora un número no entero, representado en decimal, de la forma $0,d$ . Si lo multiplicamos por dos:
+
+\begin{equation}
+E_1,d_1=0,d\cdot 2
+\end{equation}
+Donde $E_1$ representa la parte entera y $d_1$ la parte decimal del número calculado.
+Podemos entonces representar $0,d$ como,
+\begin{equation}
+\label{eq:5}
+0,d=(E_1,d_1)\cdot 2^{-1}=E_1\cdot 2^{-1}+0,d_1\cdot 2^{-1}
+\end{equation}  
+
+Si volvemos a multiplicar $0,d_1$ por dos,
+
+\begin{equation}
+E_2,d_2 = 0,d_1\cdot 2
+\end{equation}
+
+\begin{equation}
+0,d_1=E_2\cdot 2^{-1}+0,d_2\cdot 2^{-1}
+\end{equation}  
+
+y sustituyendo en \ref{eq:5}
+
+\begin{equation}
+0,d=E_1\cdot 2^{-1}+E_2\cdot 2^{-2}+0,d_2\cdot 2^{-2}
+\end{equation}
+
+¿Hasta cuando repetir el proceso? En principio hasta que obtengamos un valor cero para la parte decimal, $0,d_n=0$. Pero esta condición puede no cumplirse nunca. Puede darse el caso --de hecho es lo más probable-- de que un número que tiene una representación exacta en decimal, no la tenga en binario. El criterio para detener el proceso será entonces obtener un determinado número de decimales o bien seguir el proceso hasta que la parte decimal obtenida vuelva a repetirse. Puesto que los ordenadores tienen un tamaño de registro limitado, también está limitado el número de dígitos con el que pueden representar un número decimal. Por eso, lo habitual será truncar el número asumiendo el error que se comete al proceder así.  De este modo, obtenemos la expansión del número original en potencias de dos,
+
+\begin{equation}
+0,d\cdot 2=E_1\cdot 2^{-1}+E_2\cdot 2^{-2}+\cdots+ E_n\cdot 2^{-3}+\cdots
+\end{equation} 
+
+Donde los valores $E_1\cdots E_n$ son precisamente los dígitos correspondientes a la representación del número en binario: $0.E_1E_2\cdots E_n$. (Es trivial comprobar que solo pueden valer $0$ ó $1$).
+
+
+Veamos un ejemplo de cada caso, obteniendo la representación binaria del número $0,625$, que tiene representación exacta, y la del número $0,626$, que no la tiene. En este segundo caso, calcularemos una representación aproximada, tomando 8 decimales.
+
+\begin{table}[h]
+\begin{tabular}{|r|r|r|r|r r|r|r|r|r|}
+P decimal& &$\times 2$& P entera& &&P decimal& &$\times 2$& P entera\\
+\cline{1-4}
+\cline{7-10}
+0,625& &1,25&1& &&0,623& &1,246&1\\
+0,25  & &0,5  &0& &&0,246& &0,492&0\\
+0,5    & &1,0  &1& &&0,492& &0,984&0\\
+         & &       &  & &&0,984& &1,968&1\\
+         & &       &  & &&0,968& &1,936&1\\
+         & &       &  & &&0,936& &1,872&1\\
+         & &       &  & &&0.872& &1.744&1\\
+         & &       &  & &&0.744& &1.488&1\\
+\end{tabular}
+\end{table}
+
+Para construir la representación binaria del primero de los números, nos basta tomar las partes enteras obtenidas, por orden, escribirlas de de izquierda a derecha y añadir un $0$ y la coma decimal a la izquierda. Por tanto  la representación binaria de $0,625$ es $0,101$.  Si expandimos su valor en potencias de dos, volvemos a recuperar el número original en su representación decimal.
+
+ En el segundo caso, la representación binaria, tomando nueve decimales de $0,623$ es $0.10011111$. Podemos calcular el error que cometemos al despreciar el resto de los decimales, volviendo a convertir el resultado obtenido a su representación en base diez,
+
+ \begin{equation*}
+0\cdot 2^{0}+1\cdot 2^{-1}+0\cdot 2^{-2}+ 0\cdot 2^{-3}+1\cdot 2^{-4}+1\cdot 2^{-5}+ 1\cdot 2^{-6}+1\cdot 2^{-7}+1\cdot 2^{-8}=0,62109375
+\end{equation*} 
+
+El error cometido es, en este caso: $\text{Error}=0,623-0,62109375=0,00190625$.
+  
+ \section{Aplicaciones de Software Científico}
+Dentro del mundo de las aplicaciones, merecen una mención aparte las dedicadas al cálculo científico, por su conexión con la asignatura. 
+
+Es posible emplear lenguajes de alto nivel para construir rutinas y programas que permitan resolver directamente un determinado problema de cálculo. En este sentido, el lenguaje FORTRAN se ha empleado durante años para ese fin, y todavía sigue empleándose en muchas disciplinas científicas y de la Ingeniería.  Sin embargo, hay muchos aspectos no triviales del cálculo con un computador, que obligarían al científico que tuviera que programar sus propios programas a ser a la vez un experto en computadores.  Por esta razón, se han ido desarrollando aplicaciones específicas para cálculo científico que permiten al investigador centrarse en la resolución de su problema y no en el desarrollo de la herramienta adecuada para resolverlo.  
+ 
+En algunos casos, se trata de aplicaciones a medida, relacionadas directamente con algún área científica concreta. En otros, consisten en paquetes de funciones específicos para realizar de forma eficiente determinados cálculos, como por ejemplo
+el paquete SPSS para cálculo estadístico.
+
+Un grupo especialmente interesante lo forman algunos paquetes de software que podríamos situar a mitad de camino entre los lenguajes de alto nivel y las aplicaciones: Contienen extensas librerías de funciones, que pueden ser empleadas de una forma directa para realizar cálculos y además permiten realizar programas específicos empleando su propio lenguaje. Entre estos podemos destacar Mathematica, Maple , Matlab, Octave y Scilab y Python. El uso de estas herramientas se ha extendido enormemente en la comunidad científica. Algunas como Matlab  constituyen casi un estándar en determinadas áreas de conocimiento.
+
+ 
+
+
+    
+
+ 
+
+  
