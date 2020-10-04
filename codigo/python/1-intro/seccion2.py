@@ -2,7 +2,7 @@
 
 # Ejemplos de como operar en Python con NumPy
 # Utiliza "ipython" para tener una consola como en Matlab
-# El código de este archivo sigue el contenido de Practica_1_LCC.pdf
+# El codigo de este archivo sigue el contenido de Practica_1_LCC.pdf
 
 import numpy as np
 import matplotlib.pyplot as plt
