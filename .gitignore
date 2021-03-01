@@ -24,3 +24,7 @@
 .*.*.swo
 .*.*.gz
 .idx
+.DS_Store
+manual_spa/lcc_manual.idx
+manual_spa/lcc_manual.pdf
+*.gz
