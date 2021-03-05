@@ -4443,7 +4443,7 @@ Invoca la función recién creada desde la \emph{línea de comandos} de matlab. Obs
 >>nombre_de_tu_programa(F)
 >>nombre_de_tu_programa(F,J)
 \end{verbatim}
-Introduce, en el  workspace de matlaba --usando la \emph{línea de comandos}--  las matrices $F$ y $J$, dondo,
+Introduce, en el  workspace de matlab --usando la \emph{línea de comandos}--  las matrices $F$ y $J$, dondo,
 \begin{equation*}
 F =\begin{pmatrix}
 1&0&1\\
@@ -4455,7 +4455,7 @@ F =\begin{pmatrix}
 4&4&4
 \end{pmatrix}
 \end{equation*}
-Vuelve a ejecutar, \verb|>>nombre\_de\_tu\_programa(F,J)| \\
+Vuelve a ejecutar, \verb|>>nombre_de_tu_programa(F,J)| \\
 Genera dos matrices de tamaño $(3\times 3)$. Nómbralas como prefieras: \verb|mi_matriz1, mi_matriz2|. Ejecuta ahora,
 \begin{verbatim}
 >>nombre_de_tu_programa(mi_matriz1,J)
@@ -4467,11 +4467,11 @@ Genera dos matrices de tamaño $(3\times 3)$. Nómbralas como prefieras: \verb|mi_
 >>[A,B;C]=nombre_de_tu_programa(A,B)
 \end{verbatim}
 Crea un nuevo fichero, con el siguiente código:
-\begin{verbatim}
+\begin{lstlisting}
 A=sin(B).*cos(C)
-[D,E,F]=nombre\_de\_tu\_programa(A,C)
-G=D+E-F
-\end{verbatim}
+[D,E,F]=nombre_de_tu_programa(A,C)
+G = D + E - F
+\end{lstlisting}
 Guárdalo con el nombre que quieras.\\
 Define en la \emph{línea de comandos} matrices $B$ y $C$ adecuadas para el programa que acabas de escribir y ejecútalo.\\
 Añade al programa una primera línea de código que lo convierta en una función que tome como entradas las matrices $B$ y $C$  y que:\\
@@ -4480,7 +4480,7 @@ devuelva las matrices $G$ y $D$\\
 devuelva las matrices $G$,$D$,$E$ y $F$.
 
 Escribe una nueva función con el siguiente código,
-\begin{verbatim}
+\begin{lstlisting}
 function A=nombre_de_la_funcion(B,C)
 E=B+C^2;
 D=B-inv(C);
@@ -4489,10 +4489,73 @@ end;
 function s=nombre_funcion_dentro(l,p);
 s=l+p-2;
 end;
-\end{verbatim}
+\end{lstlisting}
 Crea matrices $B$ y $C$ adecuadas y ejecuta la función que acabas de crear. Describe cómo funciona.
 
+\item Define en la \emph{línea de comandos} las matriz $M$ y $N$ e interpreta el resultado de las condiciones lógicas impuestas.
+
+\begin{equation*}
+M =\begin{pmatrix}
+1&2&3\\
+4&5&6\\
+7&8&9
+\end{pmatrix}, \ N=\begin{pmatrix}
+2&3&4\\
+5&6&7\\
+8&9&10
+\end{pmatrix}
+\end{equation*}
+\begin{verbatim}
+>>y=m<2
+>>y=m<=2
+>>y=m>2
+>>y=m>=2
+>>y=m==2
+>>y=m~=2
+>>y=any(m<2)
+>>y=any(m<2,1)
+>>y=any(m<2,2)
+>>y=any(m==2)
+>>y=all(m>=2)
+>>y=all(m~=0)
+>>y=all(any(m<2))
+>>y=any(all(m<2))
+
+>> index=find(m>2)
+>>[i,j]=find(m<5)
+
+>> y=any(m<2)&any(n>4)
+>> y=any(m<2)&any(n>10)
+>> y=any(m<2)&any(n>6)
+>> y=any(m<2)&any(n>7)
+>> y=any(m<2)&any(n>3)
+>> y=any(m<2)&any(n>2)
+>> y=any(m>2)&any(n>2)
+>> y=any(m>4)&any(n>2)
+>> y=any(m>4,1)&any(n>2)
+>> y=any(m>4,2)'&any(n>2)
+\end{verbatim}
+Repite el estudio de las condiciones lógicas cambiando \& por \textbar
+
+\item Escribe el siguiente código en un fichero. Ejecútalo y analiza los resultados,
+\begin{lstlisting}
+dato=rand(1)
+if dato==0.5
+	dato=0
+elseif dato<0.5
+	dato=-dato*10
+else
+	dato=dato*10
+end
+\end{lstlisting}
+
+Modifica el programa,
+\begin{enumerate}
+\item Para que no muestre los resultados de los cálculos por pantalla
+\item para que, utilizando comandos \verb|elseif, &| devuelva una variable (distinta de 'dato') con valor $-1$ si se cumple que 'dato' es menor o igual que $0.3$, con valor $-0.5$ si 'dato' es mayor que $0.3$ y menor que $0.5$, con valor $0$ si 'dato' es mayor o igual que $0.5$ y menor  o igual que $0.7$ y con valor $1$ en cualquier otro caso.
+\item Convierte el emph{script}, en una función, que tome 'dato' como variable de entrada, y devuelva el valor de la variable obtenida, según la condición que se cumpla. (Lógicamente se debe eliminar o comentar la línea \verb|dato=rand(1)|).
+\end{enumerate}
 \item Dada una matriz $A \in \mathbb{R}^{n\times n}$ y un vector columna $v \in \mathbb{R}^n-{\mathbf{0}}$. Se dice que el vector $v$ pertenece al \emph{Kernel} de $A$ si se cumple que $Av =\mathbf{0}$. 
 
-Crea una función que tome como variables de entrada una matriz $A$ cuadrada de cualquier dimension $n\times n$ y un vector columna de dimensión $n$ y compruebe si$n$ pertenece o no al \emph{kernel} de $A$.
+Crea una función que tome como variables de entrada una matriz $A$ cuadrada de cualquier dimension $n\times n$ y un vector columna de dimensión $n$ y compruebe si$n$ pertenece o no al \emph{kernel} de $A$. \textbf{Nota:}Considera que la condición se cumple si todos los elementos del vector $Av$ son menores que $1e-12$
 \end{enumerate}
