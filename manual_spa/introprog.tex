@@ -4269,3 +4269,230 @@ Es decir, obtenemos el valor de los puntos $z$ de la superficie para los pares d
 \end{verbatim}
 
 Es importante insistir en que a lo largo de esta sección nos hemos limitado a introducir algunas de las posibilidades gráficas de Matlab. Para obtener una visión completa de las mismas es imprescindible leer con detenimiento la ayuda de Matlab.
+\newpage
+\section{Ejercicios}
+\begin{enumerate}
+\item Tipos de variables en Matlab; matrices y vectores. Escribe, por orden, las siguientes expresiones en la \emph{línea de comandos} de Matlab e interpreta los resultados que obtienes. En los casos en que Matlab devuelva un mensaje de error, trata de averiguar la razón. \textbf{Nota:} Es importante hacerlos por orden ya que algunos operaciones se apoyan en los resultados de operaciones anteriores.
+\begin{multicols}{2}
+\begin{enumerate}
+\renewcommand{\labelenumii}{\arabic{enumii}}
+\texttt{
+\item a=[1 2 3; 4 5 6]
+\item a=[1 2 3; 4 5]
+\item a=[ 1 2 3\\
+1 2 3\\
+1 2]
+\item[*] Operador (:) para crear vectores
+\item a=[1:10:0]
+\item a=1:10:2
+\item a=1:0.05:2
+\item a=1:-0.05:-1
+\item a=[1:10;2:12;3:13]
+\item a=[1:10;2:11;3:12]
+\item a=[1 2 7\\
+5 6 8\\
+3 2 6]
+\item b=[1 2 3]
+\item c=[a b]
+\item c=[a;b]
+\item d=[b;a]
+\item[*] Operador (:) para indexar
+\item c=[a(1,:) b]
+\item c=[a(1:2,:);b]
+\item c=[a(1:2,:);b;a(size(a,1),:)]
+\item[*] Funciones para manipulación de matrices
+\item a=[1 2 3]
+\item b=diag(a)
+\item c=diag(b)
+\item M=size(c)
+\item \ [m,n]=size(c)
+\item m=size(c)
+\item m=size(c,1)
+\item m=size(c,2)
+\item d=ones(size(a))
+\item d=ones(size(b))
+\item  d=ones(size(b,1))
+\item d=ones(size(b,1),size(c,2))
+\item f=eye(size(d,1))
+\item who
+\item whos
+\item clear all
+\item who
+\item q=[1 2 3\\
+4 5 6\\
+7 8 9]
+\item  r=diag(q,1)
+\item  r=diag(q,2)
+\item  r=diag(q,0)
+\item  r=diag(q,-1)
+\item  r=diag(q,-2)
+\item  tt=eye(1,3)
+\item  tt=eye(3,1)
+\item  tt=eye(3)
+\item  tt=eye(5)
+\item  tt=eye(5,3)\\
+\item  tt=eye(3,5)\\
+\item a=[1 3 4\\
+2 4 6]\\
+\item  b=[2 3\\
+4 5\\
+6 7]
+\item[*] Operadores aplicados a matrices
+\item c=a*b
+\item d=b*a
+\item e=[ 1 2\\
+4 5]
+\item a*e
+\item g=a*e
+\item g=e*a
+\item a*b
+\item a=[1 3 4\\
+5 6 8]
+\item b=3
+\item a*b
+\item a.*b
+\item b=[2 3]
+\item a.*b
+\item b=[ 2 3 4\\
+5 6 7]
+\item a.*b
+\item c=b'
+\item d=a'
+\item r=a-b
+\item h=a-a'
+\item j=a+b
+\item j=a'+b
+\item d=(a+b)*b'
+\item f=(a+b)*b'
+\item f=(a-b)'*b
+\item a=[ 1 3 5\\
+2 5 6
+3 4 2]
+\item p=a\^{}2
+\item r=a\^{}2-a*a
+\item r=a.\^{}2-a*a
+\item r=a\^{}2-a.*a
+\item b=[ 3 5 6\\
+2 1 1\\
+1 2 3]
+\item[*] Encadenando operaciones
+\item w=a*b\^{}(-1)
+\item w=a*inv(b)
+\item w=a/b
+\item w= a*b\^{}(-1)-a*inv(b)
+\item w= a*b\^{}(-1)-a/b
+\item w=a\^{}(-1)*b
+\item w=inv(a)*b
+\item w=a\textbackslash b
+\item w= a\^{}(-1)*b-inv(a)*b
+\item w=a\textbackslash b-inv(a)*b
+\item w=a./b
+\item w=a.\textbackslash b
+\item w=a.\^{}(-1)*b
+\item w=a.\^{}(-1)*b-a.\textbackslash b
+}
+\end{enumerate}
+\end{multicols}
+\item Obtén empleando la \emph{línea de comandos} de matlab el resultado de las siguientes expresiones:
+\begin{multicols}{2}
+\begin{align*}
+\frac{5+3x^2}{6y}\\
+\frac{1+4\sqrt{2x}}{6}y \\
+\frac{-x+\sqrt{x^2-4xy}}{2x}
+\end{align*}
+
+\begin{align*}
+\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}(x-1)^2}\\
+\sin^2(2x)+\cos^2(2x) \\
+\arctan(\infty)\\
+\arctan\left(\frac{y}{x}\right)
+\end{align*}
+\end{multicols}
+Emplea para $x$ e $y$ tanto valores escalares como matrices.
+
+\item Abre un fichero nuevo en el editor de textos de matlab.
+Escribe las siguiente líneas:\\
+\texttt{
+x = A*B\\
+y = A+B\\
+z = A*sin(B)}\\
+Guarda el fichero. Emplea el comando clear all para limpiar el workspace
+Invoca el fichero desde matlab. ¿Qué sucede?\\
+Crea en la ventana de comandos las matrices,
+\begin{equation*}
+A =\begin{pmatrix}
+1&3&4\\
+2&5&6\\
+7&8&9
+\end{pmatrix}, \ B=\begin{pmatrix}
+2&6&8\\
+3&7&8\\
+2&7&9
+\end{pmatrix}
+\end{equation*}
+Vuelve a ejecutar el programa guardado en el fichero.\\
+Añade al programa, al principio del todo, la línea \texttt{clear all}. Guarda y vuelve a ejecutar el
+programa. ¿Qué sucede ahora?\\
+Introduce las matrices A y B directamente en el código del programa debajo de la línea \texttt{clear all}. Analiza qué sucede al ejecutar de nuevo el programa.\\
+ Eliminar la línea \texttt{clear all}. Introduce a través de la ventana de comando dos matrices $A$ y $B$ distintas de las que contiene el programa. Ejecuta el programa y comprueba qué matrices utiliza para realizar los cálculos.\\
+Comenta la(s) línea(s) de código donde has definido las matrices $A$ y $B$ en el programa. Añade al principio del programa una línea para convertir el script en una función:\\
+\verb|function [x] = nombre_de_tu_programa(A,B)| \\
+Invoca la función recién creada desde la \emph{línea de comandos} de matlab. Observa lo que pasa si la invocas como:
+\begin{verbatim}
+>>nombre_de_tu_programa
+>>nombre_de_tu_programa(F)
+>>nombre_de_tu_programa(F,J)
+\end{verbatim}
+Introduce, en el  workspace de matlaba --usando la \emph{línea de comandos}--  las matrices $F$ y $J$, dondo,
+\begin{equation*}
+F =\begin{pmatrix}
+1&0&1\\
+2&0&4\\
+3&5&0
+\end{pmatrix}, \ J=\begin{pmatrix}
+1&6&7\\
+2&9&0\\
+4&4&4
+\end{pmatrix}
+\end{equation*}
+Vuelve a ejecutar, \verb|>>nombre\_de\_tu\_programa(F,J)| \\
+Genera dos matrices de tamaño $(3\times 3)$. Nómbralas como prefieras: \verb|mi_matriz1, mi_matriz2|. Ejecuta ahora,
+\begin{verbatim}
+>>nombre_de_tu_programa(mi_matriz1,J)
+>>nombre_de_tu_programa(mi_matriz2,F)
+>>nombre_de_tu_programa(mi_matriz1,mi_matriz2)
+>>resultado=nombre_de_tu_programa(F,J)
+>>[r1,r2]=nombre_de_tu_programa(F,J)
+>>[A,B;r3]=nombre_de_tu_programa(F,J)
+>>[A,B;C]=nombre_de_tu_programa(A,B)
+\end{verbatim}
+Crea un nuevo fichero, con el siguiente código:
+\begin{verbatim}
+A=sin(B).*cos(C)
+[D,E,F]=nombre\_de\_tu\_programa(A,C)
+G=D+E-F
+\end{verbatim}
+Guárdalo con el nombre que quieras.\\
+Define en la \emph{línea de comandos} matrices $B$ y $C$ adecuadas para el programa que acabas de escribir y ejecútalo.\\
+Añade al programa una primera línea de código que lo convierta en una función que tome como entradas las matrices $B$ y $C$  y que:\\
+devuelva solo la matriz $G$\\
+devuelva las matrices $G$ y $D$\\ 
+devuelva las matrices $G$,$D$,$E$ y $F$.
+
+Escribe una nueva función con el siguiente código,
+\begin{verbatim}
+function A=nombre_de_la_funcion(B,C)
+E=B+C^2;
+D=B-inv(C);
+A=nombre_funcion_dentro(E,D);
+end;
+function s=nombre_funcion_dentro(l,p);
+s=l+p-2;
+end;
+\end{verbatim}
+Crea matrices $B$ y $C$ adecuadas y ejecuta la función que acabas de crear. Describe cómo funciona.
+
+\item Dada una matriz $A \in \mathbb{R}^{n\times n}$ y un vector columna $v \in \mathbb{R}^n-{\mathbf{0}}$. Se dice que el vector $v$ pertenece al \emph{Kernel} de $A$ si se cumple que $Av =\mathbf{0}$. 
+
+Crea una función que tome como variables de entrada una matriz $A$ cuadrada de cualquier dimension $n\times n$ y un vector columna de dimensión $n$ y compruebe si$n$ pertenece o no al \emph{kernel} de $A$.
+\end{enumerate}
