@@ -22,7 +22,7 @@
 *.d.*
 .*.*.swp
 .*.*.swo
-manual_spa/lcc_manual.idx
+*.idx
 manual_spa/lcc_manual.pdf
 *.gz
 .DS_Store
