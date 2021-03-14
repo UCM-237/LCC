@@ -322,7 +322,7 @@ La ventaja de este método respecto al de Newton es que evita tener que calcular 
 \label{fig:secante3}
 \end{figure}
 
-\subsection{Método de las aproximaciones sucesivas o del punto fijo}
+\subsection{Método de las aproximaciones sucesivas o del punto fijo}\label{pfijo}
 
 El método del punto fijo es, como se verá a lo largo de esta sección, el más sencillo de programar de todos. Desafortunadamente, presenta el problema de que no podemos aplicarlo a todas las funciones. Hay casos en los que el método no converge, con lo que no es posible emplearlo para encontrar la raíz o raíces de una función.
  
@@ -889,3 +889,88 @@ p =
      1     1    -2
 \end{verbatim}
 
+\section{Ejercicios}
+\begin{enumerate}
+\item Crea una función en matlab que implemente el método de  la bisección para obtener la raíz de una función cualquiera $y = f(x)\vert\  x, y \in \mathbb{R}$. La función deberá admitir como variables de entrada, la función $f(x)$, un intervalo de búsqueda $[a,b]$, un número máximo de iteraciones, $nmax$, a realizar y la tolerancia $tol$ o error máximo admisible para la solución obtenida. Así mismo la función deberá devolver como como variables de salida, el valor aproximado obtenido para la raíz $r$, el error cometido $f(r)$ y el número de iteraciones empleado para alcanzar la solución.
+
+Aplica el programa creado a la función de ejemplo empleada empleada en el manual, $f(x) = e^x-x2$, para comprobar que funciona correctamente.
+
+\item Crea una función en matlab que implemente el método de  interpolación lineal para obtener la raíz de una función cualquiera $y = f(x)\vert\  x, y \in \mathbb{R}$. La función deberá admitir como variables de entrada, la función $f(x)$, un intervalo de búsqueda $[a,b]$, un número máximo de iteraciones, $nmax$, a realizar y la tolerancia $tol$ o error máximo admisible para la solución obtenida. Así mismo la función deberá devolver como como variables de salida, el valor aproximado obtenido para la raíz $r$, el error cometido $f(r)$ y el número de iteraciones empleado para alcanzar la solución.
+
+Aplica el programa creado a la función de ejemplo empleada empleada en el manual, $f(x) = e^x-x2$, para comprobar que funciona correctamente.
+
+\item Crea una función en matlab que implemente el método de  Newton-Raphson para obtener la raíz de una función cualquiera $y = f(x)\vert\  x, y \in \mathbb{R}$. La función deberá admitir como variables de entrada, la función $f(x)$ y su función derivada $f'(x)$, un punto inicial de búsqueda $x_0$, un numero máximo de iteraciones, $nmax$, a realizar y la tolerancia $tol$ o error máximo admisible para la solución obtenida. Así mismo la función deberá devolver como como variables de salida, el valor aproximado obtenido para la raíz $r$, el error cometido $f(r)$ y el número de iteraciones empleado para alcanzar la solución.
+
+Aplica el programa creado a la función de ejemplo empleada empleada en el manual, $f(x) = e^x-x2$, para comprobar que funciona correctamente.
+
+\item Crea una función en matlab que implemente el método de la secante para obtener la raíz de una función cualquiera $y = f(x)\vert\  x, y \in \mathbb{R}$. La función deberá admitir como variables de entrada, la función $f(x)$ y su función derivada $f'(x)$, dos punto iniciales de búsqueda $x_0,\ x_1$, un numero máximo de iteraciones, $nmax$, a realizar y la tolerancia $tol$ o error máximo admisible para la solución obtenida. Así mismo la función deberá devolver como como variables de salida, el valor aproximado obtenido para la raíz $r$, el error cometido $f(r)$ y el número de iteraciones empleado para alcanzar la solución.
+
+Aplica el programa creado a la función de ejemplo empleada empleada en el manual, $f(x) = e^x-x2$, para comprobar que funciona correctamente.
+\item Crea una función en matlab que implemente el método del punto fijo para obtener la raíz de una función cualquiera $y = f(x)\vert\  x, y \in \mathbb{R}$. La función deberá admitir como variables de entrada, la función auxiliar $g(x)$, necesaria para aplicar el método, un punto inicial de búsqueda $x_0$, un numero máximo de iteraciones, $nmax$, a realizar y la tolerancia $tol$ o error máximo admisible para la solución obtenida. Así mismo la función deberá devolver como como variables de salida, el valor aproximado obtenido para la raíz $r$, el error cometido $f(r)$ y el número de iteraciones empleado para alcanzar la solución.
+
+Aplica el programa creado a la función de ejemplo empleada empleada en el manual, $f(x) = e^x-x2$, empleando para ello los tres ejemplos de funciones auxiliare $g(x)$ propuestos en la sección \ref{pfijo}. Comprueba que se cumple en cada caso lo expuesto en dicha sección.
+
+\item Se quiere aproximar el valor de $\pi$ utilizando las dos siguientes funciones:
+\begin{equation*}
+y=\cos(x)+1
+\end{equation*}
+\begin{equation*}
+y=\cos(x/2)
+\end{equation*}
+\begin{enumerate}
+\alph{enumii}
+\item \label{it1}Dibuja las dos funciones y sus derivadas en el intervalo $[\frac{\pi}{2},\frac{3\pi}{2}]$.
+\item Aplica el método de la secante para cada función, tomando como punto de partida  $x_0=3$ y obteniendo en ambos caso la solución con una tolerancia de 0.01. Elige para $x_1$ un valor que consideres adecuado.\\
+El programa utilizado deberá añadir al gráfico obtenido en  \ref{it1}), un punto en la posición $(x_i,y_i)$ que represente el valor obtenido de la raíz en cada iteración $i$.
+\item Compara el número de iteraciones que se necesitan en cada caso para obtener la solución.
+\end{enumerate}
+\item El método de Steffensen, permite disminuir el número de iteraciones empleadas para obtener una raíz empleando el método del punto fijo.
+
+El algoritmo calcula cada iteración usando dos pasos intermedios de acuerdo con el siguiente procedimiento,
+
+\begin{lstlisting}
+while{condición} 
+  x0 = x
+  x1 = g(x0)
+  x2 = g(x1)
+  x  = x0 - (x1 -x0)^2/(x2 - 2x1 + x0)
+end
+\end{lstlisting}
+
+Donde $g(x)$ representa la función auxiliar de la que se busca el punto fijo.
+
+
+Dada la función,
+
+\begin{equation*}
+y= x^2-2x-3
+\end{equation*} 
+
+se le puede aplicar el método del punto fijo a  partir de dos reordenaciones distintas:
+\begin{equation}
+x^2-2x-3=0 \Rightarrow x=\sqrt{2x+3}
+\end{equation}
+y
+\begin{equation}
+x^2-2x-3=0 \Rightarrow x=\frac{3}{x-2}
+\end{equation}
+\begin{enumerate}
+\item Aplica el método del punto fijo, tomando como punto de partida $x_0=4$, mediante ambas reordenaciones. Calcula en ambos casos la raíz con una tolerancia de $0.0001$. Indica en cada caso: el valor de la raíz y el número de interaciones empleadas.  ¿Son razonables los resultados?
+
+\item Repite el calculo empleando ahora el método de Steffensen y comprueba si emplea o no menos iteraciones que el punto fijo.
+\end{enumerate}
+
+\item Un objeto se mueve de acuerdo con la siguiente ley:
+\begin{equation}
+x_1 = 3t^6 - 2t^5 + t + 25
+\end{equation}
+Donde  $t$ representa el tiempo en segundos y $x_1$ la posición del objeto en metros y \\
+ Un segundo objeto sale en persecución del primero en el instante de tiempo $t=0$. Su ley del movimiento es:
+\begin{equation}
+x_2 = 4t^6
+\end{equation}
+\begin{enumerate}
+\item Dibuja en un mismo gráfica la posición en función del tiempo para los dos móviles, de modo que se observe el punto de alcance. (1 punto) 
+\item Calcula, empleando el método de la bisección o el de \emph{regula falsi},  el instante de tiempo y la posición en que el segundo móvil alcanza al primero (2 puntos) 
+\end{enumerate}
+\end{enumerate}
