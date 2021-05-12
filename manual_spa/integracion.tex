@@ -736,3 +736,88 @@ plot(t,y)
 
 
 El resto de los métodos de Runge-Kutta, los dejaremos para cuando seáis más mayores... Pero que conste que es de lo más interesante de los métodos numéricos.
+
+\section{Test del curso 2020/21}
+
+\begin{figure}[h]
+\begin{minipage}{0.5\textwidth} \ 
+\includegraphics[width=\textwidth]{dibujillo.eps}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{align*}
+g &= 10 \, \text{m}/\text{s}^2 \text{\ gravedad}\\
+k &= 60 \, \text{N}/\text{m} \text{\ constante recuperadora del muelle}\\
+m &= 2 \, \text{kg} \text{\ masa del bloque}\\
+\alpha &= \frac{\pi}{6} \text{\ ángulo del plano inclinado}\\
+N &= \text{Reacción normal del plano}\\
+p &= mg\\
+	\mu &= 0.1 \, \text{kg}/\text{s} \text{\ coeficiente de rozamiento}\\
+\end{align*}
+
+\end{minipage}
+\caption{Sistema masa-muelle-plano inclinado.}
+\label{fig1}
+\end{figure}
+
+Sobre un plano inclinado se coloca un bloque sujeto por un muelle, tal y como muestra en la Figura \ref{fig1}. La superficie de contacto entre el bloque y el plano está muy pulida; por lo que se puede considerar que el rozamiento entre ambos es proporcional a la velocidad $v_x(t(t))\in\mathbb{R}$ a lo largo del eje paralelo al plano.
+
+El movimiento del bloque en la dirección del plano puede determinarse mediante la ecuación
+\begin{equation}
+	ma(t) = -kx(t) -\mu v_x(t) + p_x, \label{eq: f}
+\end{equation}
+donde $a(t)\in\mathbb{R}$ representa la aceleración del bloque, $x(t)\in\mathbb{R}$ su posición y el resto constantes se describen en la Figura \ref{fig1}. El origen, $x=0$, se toma en el punto en donde la fuerza recuperadora del muelle es nula. La posición crece en el sentido de bajada a lo largo del plano.
+
+\begin{enumerate}
+
+	\item \label{p1} Emplea el método de Euler para estimar las posición $x(t)$ y las velocidad $v_x(t)$ del bloque a partir de la ecuación (\ref{eq: f}). Utiliza un paso de integración $h =10^{-3}\text{s}$. Considera una posición inicial $x(0) =0\text{m}$, una velocidad inicial $v(0) = 0\text{m/s}$ y un tiempo final de integración $t_{f}=11\text{s}$.
+
+\item \label{p2} Representa gráficamente los resultados obtenidos: Posición frente a tiempo y velocidad frente a tiempo. Emplea una figura distinta para cada representación. No olvides añadir rótulos a los ejes indicando las variables representadas con sus unidades.
+
+\item La solución analítica del problema, para velocidad inicial $v(0)=0$ y cualquier posición inicial $x(0)$ toma la siguiente forma,
+
+%\begin{equation}
+%x(t) = \frac{mp_x}{k}-\left(\frac{mp_x}{k}-x_0\right)\frac{e^{-\frac{Fr}{2}t}}{\sqrt{1-\frac{F^2_r m}{4k}}}\cos\left(\sqrt{\frac{k}{m}-\frac{F^2_r}{4}}\cdot t-\text{asin}\left(\frac{F_r}{2}\sqrt{\frac{m}{k}}\right)   \right)
+%\end{equation}
+%
+
+\begin{equation}\label{eq2}
+	x(t) = \frac{p_x}{k}-\left(\frac{p_x}{k}-x(0)\right)\frac{\omega_0}{\omega}e^{-\eta t}\cos\left(\omega t-\phi \right)
+\end{equation}
+donde,
+
+\begin{equation}
+\begin{matrix}
+\omega_0 = \sqrt{\frac{k}{m}} & \eta = \frac{\mu N}{2m}\\
+\ & \ \\
+\omega = \sqrt{\omega_0^2 -\eta^2} &
+\phi = \arcsin \left(\frac{\eta}{\omega_0}\right)
+\end{matrix} \nonumber
+\end{equation}
+ 
+\begin{enumerate}
+\item Calcula la posición del bloque mediante la ecuación (\ref{eq2}). Emplea para ello el mismo intervalo y los mismos instantes de tiempo empleados en el apartado \ref{p1}. Representa los resultados sobre el gráfico  para la posición calculada mediante el método de Euler que has obtenido en el apartado \ref{p2}. 
+\item Representa en un gráfico de barras los residuos resultantes de comparar la solución analítica con la obtenida por el método de Euler.
+\item Calcula el error cuadrático medio cometido al emplear el método de Euler. Considera como exacta la solución analítica (\ref{eq2}).
+\end{enumerate}
+
+\item Los instantes de tiempo para los que la posición del bloque alcanza un máximo o un mínimo local puede obtenerse a partir de la frecuencia de oscilación $\omega$,
+\begin{equation}\label{eq4}
+t_{max/min} = \frac{n \pi}{\omega}, n = 1,2,3,\cdots, \infty
+\end{equation}
+\begin{enumerate}
+\item \label{p4}Emplea las ecuaciónes (\ref{eq4}) y (\ref{eq2}) para obtener los primeros 20 puntos singulares (máximos o mínimos) del movimiento del bloque. Represéntalos sobre el gráfico de la posición, obtenido en el apartado \ref{p2}.
+\item Utilizando los datos obtenidos en el apartado \ref{p4}, emplea el método de diferencia de dos puntos centrada para obtener las derivadas de las posiciones en los máximos y mínimos locales con respecto al tiempo. Si hay puntos para los que no es posible aplicar este método, calcula su derivada empleando otra aproximación razonable.
+ 
+\item Representa los resultados obtenidos en el apartado anterior sobre el gráfico de la velocidad obtenido en el ejercicio \ref{p2}. A la vista de los resultados, ¿Cómo valorarías la precisión del método empleado para obtener las derivadas? 
+\end{enumerate}
+
+\item A partir de los resultados obtenidos para la velocidad en el apartado \ref{p1}, calcula la posición del bloque en el instante de tiempo $t=1s$ mediante la siguiente integral
+\begin{equation}
+x(1) = \int_0^1v_x(t)dt,
+\end{equation}
+\begin{enumerate}
+\item Emplea para ello el método del trapecio.
+\item Compara el resultado con los valores obtenidos tanto mediante el método de Euler como a partir de la solución analítica.\\ 
+\textbf{Nota:} Ten en cuenta que el método de Euler puede que no calcule $x(1)$ y $v(1)$ ya que por error de precisión el computador no obtiene exactamente $t=1$s. Por tanto, emplea para el cálculo y la comparativa los valores de $x(t)$ y $v(t)$ correspondientes al tiempo más próximo a $t=1\text{s}$.
+\end{enumerate}
+\end{enumerate}

@@ -1364,4 +1364,80 @@ Podemos, por ejemplo, elegir libremente todos los puntos de control de la curva 
 \end{figure}
  
 
-La figura \ref{fig:ibz3} muestra un ejemplo de interpolación en la que se ha aplicado la condición de continuidad en la derivada que acabamos de describir
+La figura \ref{fig:ibz3} muestra un ejemplo de interpolación en la que se ha aplicado la condición de continuidad en la derivada que acabamos de describir.
+
+\section{Test del curso 2020/21}
+
+El archivo con los datos lo puedes encontrar en
+\url{}
+
+\noindent \textbf{Problema 1}. Una cuerda de escalada aumenta su longitud cuando está sometida a una tensión estacionaria en uno de sus extremos. En particular, el aumento de longitud sigue la siguiente ley
+\begin{equation}\label{eq:0}
+T = b\tanh(ax),
+\end{equation}
+donde\footnote{$\mathbb{R}^+$ es el conjunto de números reales no negativos.} $T \in \mathbb{R}^+$ es la tensión aplicada en Newtons, $x \in \mathbb{R}^+$ es la elongación de la cuerda en metros y $a, b \ \in \mathbb{R}^+$ son parámetros constantes que dependen de las características de la cuerda.
+
+En función del comportamiento físico de la cuerda, podemos distinguir tres regímenes:
+
+\begin{itemize}
+	\item \emph{Comportamiento elástico}: Se dice que el comportamiento de la cuerda es elástico si al desaparecer la tensión la cuerda recupera su longitud original. Esto se cumple para tensiones estacionarias pequeñas, y las elongaciones están acotadas por un valor positivo $x_{le}$, esto es, $0 \le x \le x_{le}$. En régimen elástico, la ecuación (\ref{eq:0}) puede aproximarse por la siguiente expresión
+\begin{equation}\label{eq:1}
+T = \kappa x - \gamma x^3,
+\end{equation}
+donde $\kappa,\gamma \in \mathbb{R}^+$ son también constantes.
+
+\item \emph{Comportamiento plástico}: Se dice que el comportamiento de la cuerda es plástico si al desaparecer la tensión la cuerda se deforma y no recupera su longitud original. Esto ocurre para tensiones medias, y la elongación alcanzada en este régimen está también acotada por $x_{le} < x \le x_{max}$.
+
+\item \emph{Rotura}: Para tensiones grandes la cuerda no admite elongaciones mayores que $x_{max}$ y se rompe.
+
+\end{itemize}
+
+La fábrica de cuerdas de escalada \textit{Pa'bennos Matao S.L.} ha realizado un estudio sobre un nuevo modelo de cuerda. En dicho estudio se fijó un extremo de la cuerda a una mesa abatible suficientemente grande (que hará la función de un plano inclinado), y se ató el otro extremo de la cuerda a una pesa. De manera secuencial se fue incrementando el ángulo formado por la mesa con la horizontal. En particular, se empezó con cero grados y aumentando el ángulo hasta que finalmente la cuerda alcanzó $x_{max}$ y se rompió. 
+
+Del estudio se pudo registrar la elongación sufrida por la cuerda por los distintos $i\in\{1,\dots,52\}$ ángulos de inclinación. Estos datos están en el archivo:  \texttt{cuerda.txt}, en donde:
+\begin{itemize}
+	\item La primera columna corresponde a los ángulos $\theta_i$ medidos en radianes.
+	\item La segunda columna corresponde a las elongaciones $x_i$ medidas en metros.
+\end{itemize}
+
+\begin{enumerate}
+\item (\textbf{1 punto}) Estima el valor de la elongación $x_{max}$ para el cual se produce la rotura de la cuerda.
+
+\item (\textbf{1 punto}) Obtén la tensión ejercida por la pesa sobre la cuerda para cada ángulo de inclinación $\theta_i$ de la mesa, esto es
+\begin{equation} \label{eq:2}
+T_i = mg\sin(\theta_i),
+\end{equation}
+donde $m =1000$ Kg y $g = 9.8$ m/s$^2$. Representa gráficamente los datos: $T_i$ frente a $x_i$.
+
+\item A partir de los pares de datos $T_i$ y $x_i$ podemos estimar la ecuación (\ref{eq:1}).
+\begin{enumerate}
+\item (\textbf{2 puntos}) Ajusta los datos por mínimos cuadrados a un polinomio de grado tres. Dado que dicha aproximación solo es válida para el régimen de comportamiento elástico, es imprescindible realizar el ajuste del polinomio asignando pesos a cada par de datos. Para dar más valor a las elongaciones pequeñas y menos a las grandes, utiliza la siguiente expresión para definir los pesos
+\begin{equation}
+\omega_i = e^{-10x_i^2}.
+\end{equation}
+\item (\textbf{1 punto})  Representa, sobre la gráfica dibujada en el apartado 2a, el polinomio obtenido en el apartado 3a. Según tu criterio, ¿es razonable el ajuste realizado? \\ \textbf{Nota:} Recuerda que el vector de coeficientes, obtenido con el algoritmo de mínimos cuadrados del manual, está ordenado al revés con respecto a lo que esperan las funciones de Matlab. Puedes reordenarlo a mano o con el comando \texttt{flipud(p)}.
+\end{enumerate}
+
+\item (\textbf{1 punto})  Los coeficientes de las ecuaciones (\ref{eq:0}) y (\ref{eq:1}) están relacionados por las siguientes expresiones
+\begin{equation}
+\kappa = b\cdot a, \quad \gamma = \frac{b\cdot a^3}{3}. \nonumber
+\end{equation}
+		Calcula los valores de $a$ y $b$ a partir de los coeficiente del polinomio obtenido en el apartado 3a. Representa, en la misma gráfica de los apartados anteriores, la función $T(x) = b\tanh(ax)$. Explica, a la vista del gráfico, si los resultados obtenidos son razonables o no. 
+
+\item (\textbf{1 punto}) Calcula el valor de los residuos $r_i = T_i - P_3(x_i)$, donde $P_3(x)$ es el polinomio de grado tres obtenido en el apartado 3a. Si la cota $x_{le}$ para el comportamiento elástico de la cuerda viene definida cuando $r_i \approx 500 N$. Encuentra un valor aproximado para $x_{le}$. \\
+\textbf{Nota:} Hay que buscar $x_{le}$ empleando código. No vale dibujar los residuos y estimarlo a vista.
+\end{enumerate}
+
+\noindent \textbf{Problema 2.} Dados los siguiente valores de la función $f(x)$:
+\begin{equation}
+f(0) = 1, \quad f \left(\frac{\pi}{4}\right)= \frac{\sqrt{2}}{2}, \quad f \left(\frac{\pi}{2}\right) = 0, \quad f \left(\frac{3\pi}{4}\right) = -\frac{\sqrt{2}}{2}, \quad f(\pi) = -1 \nonumber
+\end{equation}
+\begin{enumerate}
+\item (\textbf{1.5 puntos}) Utilizando el comando de Matlab correspondiente. Obtener mediante interpolación con splines cúbicos los valores de la función $f(x)$ sobre cien puntos equiespaciados en el intervalo $[0,\pi]$.
+
+\item (\textbf{1.5 puntos}) Dibuja mediante un diagrama de barras los errores cometidos entre los $f(x)$ y la función $\cos(x)$ de Matlab en los mismos puntos del intervalo anterior. Considera que no necesitamos saber más de dos decimales para el cálculo de la función coseno; ¿podríamos utilizar la interpolación para $f(x)$?
+\end{enumerate}
+
+\noindent \textbf{Problema 3.} (\textbf{1 punto}) La fabrica de cuerdas \textit{Pa'bennos Matao S.L.} ha decido regalar un punto a todos los estudiantes de los grupo 1E por su colaboración en la caracterización de su nueva cuerda.
+
+

@@ -987,3 +987,36 @@ da la probabilidad de que una partícula de un gas se mueva con velocidad $v$. Do
 \end{enumerate}
 
 \end{enumerate}
+
+\section{Test del curso 2020/2021}
+\begin{enumerate}
+\item Una señal de FM, viene representada por la función
+\begin{equation}
+	x(t) = 2\cos\left(\pi \, t+ \frac{3}{2}\sin\left(\frac{\pi}{2} \, t\right)\right).
+\end{equation}
+\begin{enumerate}
+	\item \textbf{1 punto. }Dibuja la función en el intervalo $[0,\pi]$ Emplea para ello valores equiespaciados $0.01\pi$.
+	\item \textbf{3 puntos. }Calcula los tres primeros instantes de tiempo en los que la señal vale cero, empleando para ello el método de la bisección. Elige en cada caso los intervalos adecuados. Obtén los resultados empleando una tolerancia $tol=0.001$ e indica el número de iteraciones empleadas.
+\end{enumerate}
+
+\item  Han Solo ha situado en reposo al Halcón Milenario en un punto del universo alejado de toda galaxia. Tras dejar a Chewbacca en una nave auxiliar, Han pone en marcha los motores (modelo \emph{Girodyne SRB42 Sublight Engine Thrusters}) y el Halcón acelera con una aceleración uniforme $a_0 = 3\times10^3\ m/s^2$. Chewabaca --que no estudió físicas--  desconoce la Teoría de la Relatividad, y por lo tanto piensa que puede calcular la posición $x_{cl}$ con respecto del Halcón empleando la función clásica del movimiento rectilíneo uniformemente acelerado
+\begin{equation}
+	x_{cl}(t) =\frac{1}{2}a_0t^2.
+\end{equation}
+		En realidad el Halcón no puede acelerar indefinidamente (sobrepasaría la velocidad de la luz, cosa imposible con los \emph{Sublight Engine Thrusters}), por lo que la posición real $x_{rel}$ a la que se encuentra viene expresada por
+\begin{equation}
+	x_{rel}(t) = \frac{c^2}{a_0}\sqrt{1 + \frac{a_0^2\,t^2}{c^2}} -\frac{c^2}{a_0}, 
+\end{equation}
+		donde $c \approx 3\times 10^8 m/s$ representa la velocidad de la luz en el vacío. 
+
+		En los siguientes pasos vamos a calcular cuanto tiempo transcurre hasta que Chewbacca comete un error de un miliparsec\footnote{$1\,\text{Parsec} \approx 3\times 10^{16}m$.} en el cálculo de la posición del Halcón.
+
+\begin{enumerate}
+	\item {\bf 2 puntos.} Define la función de error $e(t) = x_{cl}(t) - x_{rel}(t)$ y simplifícala con los datos numéricos dados. Acto seguido, reescribe la función error como $e(t) = t - g(t)$ para poder aplicar más adelante el algoritmo del punto fijo. Con una sola descomposición de $e(t)$ es suficiente. De hecho, quédate únicamente con aquella que tenga una $g(t)$ más simple según tu criterio.
+
+	\item {\bf 1.5 puntos.} Dibuja en una misma gráfica la función $y = g(t)$ y la bisectriz del primer cuadrante $y = t$, y comprueba que $g(t)$ tiene efectivamente un punto fijo. Para la gráfica escoge el intervalo de tiempo $[0, \quad 3 \times 10^5]$ segundos con intervalos de $1\times 10^4$ segundos.
+	\item {\bf 2.5 puntos.} Emplea el método del punto fijo para obtener el tiempo en el que el error en posición alcanza un valor igual a un miliParsec. Da el resultado en días terrestres. Toma como valor inicial $t_0 = 1$ y da el resultado con una tolerancia $tol = 0.1$. Indica el número de iteraciones que ha empleado el método para obtener el resultado.
+	\item {\bf Bonus track: 1 punto.} Un Parsec equivale a la distancia desde el Sol a una estrella que, vista desde la Tierra, subtiende un ángulo de paralaje de 1 segundo de grado. Da dos razones por las que el Halcón Milenario nunca pudo atravesar el corredor Kessel en menos de 12 Parsecs, como afirma Han Solo.
+
+\end{enumerate}
+\end{enumerate}
