@@ -12,8 +12,8 @@ h=sqrt(a^2+b^2)
 s=a/h
 
 %calculo del coseno
-        0 2 -1 2a=b/h %error estamos sobreescribiendo el valor del coseno en la variable  
-      % que guardaba e valor del cateto
+a=b/h %error estamos sobreescribiendo el valor del coseno en la variable  
+% que guardaba el valor del cateto
 
 %calculo de la tangente
 t=b/a
