@@ -279,7 +279,7 @@ for j=1:n
 end
 \end{verbatim}
 
-\section{Diferencias divididas.} \index{Interpolación! Diferencias Divididas} \index{Diferencias Divididas}
+\section{Diferencias divididas.}\label{sec:difdiv} \index{Interpolación! Diferencias Divididas} \index{Diferencias Divididas}
 Tanto el método de la matriz de Vandermonde como el de los polinomios de Lagrange, presentan el inconveniente de que si se añade un dato más $(x_{n+1}, y_{n+1})$ a la colección de datos ya existentes, es preciso recalcular el polinomio de interpolación desde el principio. 
 
 El método de las diferencias divididas, permite obtener el polinomio de interpolación en un número menor de operaciones que en el caso del polinomio de Lagrange y además, el cálculo se hace escalonadamente, aprovechando todos los resultados anteriores cuando se añade al polinomio la contribución de un nuevo dato.
@@ -901,7 +901,7 @@ y1 =
     3.3438    1.1938
 \end{verbatim}
 
-\section{Ajuste polinómico por el método de mínimos cuadrados}\index{Mínimos cuadrados} \index{Ajuste polinómico}
+\section{Ajuste polinómico por el método de mínimos cuadrados}\label{sec:mc}\index{Mínimos cuadrados} \index{Ajuste polinómico}
 Los métodos de interpolación que hemos descrito en las secciones anteriores pretenden encontrar un polinomio o una función definida a partir de polinomios que pase por un conjunto de datos. En el caso del ajuste por mínimos cuadrados, lo que se pretende es buscar el polinomio, de un grado dado, que mejor se aproxime a un conjunto de datos.
 
 Supongamos que tenemos un conjunto de $m$ datos, 
@@ -1366,16 +1366,41 @@ Podemos, por ejemplo, elegir libremente todos los puntos de control de la curva 
 
 La figura \ref{fig:ibz3} muestra un ejemplo de interpolación en la que se ha aplicado la condición de continuidad en la derivada que acabamos de describir.
 
+\section{ejercicios}
+\begin{enumerate}
+\item Carga en Matlab los datos del fichero \texttt{datos.txt}\footnote{disponible en \url{https://github.com/UCM-237/LCC/tree/master/manual\_spa/datos}} y realiza las siguientes tareas:
+\begin{enumerate}
+\item \label{ej1a} Crea una función que a partir de dos vectores de datos $x,y$ de igual longitud $n+1$, calcula la matriz de Vandermonde necesaria   para obtener el polinomio de interpolación asociado a los puntos. Empleando la primera columna de datos contenida en \texttt{datos.txt} como datos $x$ y la segunda como datos $y$, genera el polinomio de interpolación,
+\begin{equation*}
+p(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n
+\end{equation*}
+
+Calcula el valor que toma el polinomio de interpolación en 100 puntos equiespaciados entre los valores $x_0$ y $x_{n}$ de los datos del fichero. Dibuja en una misma gráfica los resultados obtenidos, empleando una línea continua, y los valores del fichero, mediante puntos separados empleando el símbolo que prefieras. Comprueba que el polinomio pasa por los puntos contenidos en el fichero.
+
+\item Reproduce en matlab la función 'Lagrange' de la sección \ref{sec:lagranje} para calcular el polinomio interpolador de Lagrange. Emplea la función que acabas de crear para recalcular los valores del polinomio de interpolación realizado en el ejercicio anterior y comprueba que los resultados obtenidos son los mismos que empleando la matriz de Vandermonde.
+
+\item A partir de los ejemplos de la sección  sección \ref{sec:difdiv}, crea un programa que calcule los coeficientes del polinomio interpolador de diferencias divididas a partir de dos vectores de datos  $x,y$ de igual longitud $n+1$ y un segundo programa que calcule el valor del polinomio en un punto cualquiera a partir de los coeficientes obtenidos con el primer programa. Vuelve a calcular, empelando ahora el polinomio de diferencias dividas, los valores del polinomio de interpolación sobre los mismos datos empleados en los ejercicios anteriores y comprueba que da los mismos resultados.
+
+\item Por último, crea una función que calcule el polinomio de interpolación de Newton-Gregory (sección \ref{sec:newgre}). ¿Es posible usarlos para interpolar los datos del archivo \texttt{datos.txt}? Si la respuesta el afirmativa, repite el cálculo del polinomio de interpolación, empleando Newton-Gregory y comprueba si coincide con lo obtenido en los ejercicios anteriores.
+
+\item Usa el comando \texttt{help} para conocer los distintos métodos de interpolación por intervalos disponibles  para la función \texttt{interp1}. Empleando de nuevo los datos del fichero \texttt{datos.txt}, obtén el resultado de interpolar los valores en 100 puntos equiespaciados entre los valores $x_0$ y $x_{n}$ de los datos del fichero mediante \texttt{interp1}.  Emplea para ello los métodos \texttt{'nearest','linear'} y \texttt{'spline'}. Dibuja los resultados en la misma gráfica empleada en el ejercicio  \ref{ej1a})
+\end{enumerate}
+\item Construye a partir del código de ejemplo de la sección \ref{sec:mc}, una función que calcule el polinomio de grado $n$ que ajusta por mínimos cuadrados un conjunto de pares de datos datos $(x, y)$. Pruébalo sobre los datos del fichero \texttt{datos.txt}, sin emplear pesos. Compara los coeficientes del polinomio obtenido con los que se obtienen empleando el comando \texttt{polyfit} de Matlab. ¿Qué conclusión sacas?
+
+\item Añade el código necesario al programa anterior para que, una vez obtenidos los coeficientes del polinomio de mínimos cuadrados, la función calcule y devuelva un vector $r$ con los valores de los residuos, $r = y -p(x)$, donde $x$ e $y$ son los vectores del conjunto de datos para los que se ha obtenido el polinomio de mínimos cuadrados y $p$ los valores obtenidos aplicando el polinomio a los valores $x$ de la colección de datos.
+\end{enumerate}
+
+
 \section{Test del curso 2020/21}
 
-El archivo con los datos lo puedes encontrar en
-\url{}
+%El archivo con los datos lo puedes encontrar en
+%\url{}
 
 \noindent \textbf{Problema 1}. Una cuerda de escalada aumenta su longitud cuando está sometida a una tensión estacionaria en uno de sus extremos. En particular, el aumento de longitud sigue la siguiente ley
 \begin{equation}\label{eq:0}
 T = b\tanh(ax),
 \end{equation}
-donde\footnote{$\mathbb{R}^+$ es el conjunto de números reales no negativos.} $T \in \mathbb{R}^+$ es la tensión aplicada en Newtons, $x \in \mathbb{R}^+$ es la elongación de la cuerda en metros y $a, b \ \in \mathbb{R}^+$ son parámetros constantes que dependen de las características de la cuerda.
+donde $T \in \mathbb{R}^+$ es la tensión aplicada en Newtons, $x \in \mathbb{R}^+$ es la elongación de la cuerda en metros y $a, b \ \in \mathbb{R}^+$ son parámetros constantes que dependen de las características de la cuerda.
 
 En función del comportamiento físico de la cuerda, podemos distinguir tres regímenes:
 
@@ -1394,7 +1419,7 @@ donde $\kappa,\gamma \in \mathbb{R}^+$ son también constantes.
 
 La fábrica de cuerdas de escalada \textit{Pa'bennos Matao S.L.} ha realizado un estudio sobre un nuevo modelo de cuerda. En dicho estudio se fijó un extremo de la cuerda a una mesa abatible suficientemente grande (que hará la función de un plano inclinado), y se ató el otro extremo de la cuerda a una pesa. De manera secuencial se fue incrementando el ángulo formado por la mesa con la horizontal. En particular, se empezó con cero grados y aumentando el ángulo hasta que finalmente la cuerda alcanzó $x_{max}$ y se rompió. 
 
-Del estudio se pudo registrar la elongación sufrida por la cuerda por los distintos $i\in\{1,\dots,52\}$ ángulos de inclinación. Estos datos están en el archivo:  \texttt{cuerda.txt}, en donde:
+Del estudio se pudo registrar la elongación sufrida por la cuerda por los distintos $i\in\{1,\dots,52\}$ ángulos de inclinación. Estos datos están en el archivo:  \texttt{cuerda.txt}\footnote{disponible en \url{https://github.com/UCM-237/LCC/tree/master/manual\_spa/datos}}, en donde:
 \begin{itemize}
 	\item La primera columna corresponde a los ángulos $\theta_i$ medidos en radianes.
 	\item La segunda columna corresponde a las elongaciones $x_i$ medidas en metros.
