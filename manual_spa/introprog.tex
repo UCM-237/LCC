@@ -2091,7 +2091,7 @@ Un script en Matlab es un simple fichero de texto que contiene un conjunto de se
 % Este programa toma dos matrices llamadas A y B del espacio de trabajo de
 %  Matlab, calcula su suma y la guarda en una variable llamada suma, calcula el 
 % producto y lo guarda en una variable llamada producto y, por última genera un 
-%mensaje en la ventana de comandos para indicar que ha terminado de ejecutarse.
+% mensaje en la ventana de comandos para indicar que ha terminado de ejecutarse.
 suma=A+B
 producto=A*B
 disp('ejecución terminada') 
@@ -2303,13 +2303,13 @@ Veamos un ejemplo sencillo de llamada de una función desde otra,
 
 \begin{lstlisting}
 function salida=ejemplo2(entrada)
-%esta funcion toma el valor de entrada lo eleva al cuadrado y pasa el
-%resultado aun segunda función que calcula la raiz cuadrada...
-%entrada y salida deberían ser iguales al final
+% esta funcion toma el valor de entrada lo eleva al cuadrado y pasa el
+% resultado aun segunda función que calcula la raiz cuadrada...
+% entrada y salida deberían ser iguales al final
 
 x=entrada^2;
 
-%%%%llamada a la segunda función%%%%
+%%%%    llamada a la segunda función%%%%
 salida=raiz(x);
 \end{lstlisting}
 
@@ -2331,16 +2331,16 @@ Además al ejecutar la función \texttt{ejemplo2}, se buscará el código de la func
 
 \begin{lstlisting}
 function salida=ejemplo2(entrada)
-%esta funcion toma el valor de entrada lo eleva al cuadrado y pasa el
-%resultado aun segunda función que calcula la raiz cuadrada...
-%entrada y salida deberían ser iguales al final
+% esta funcion toma el valor de entrada lo eleva al cuadrado y pasa el
+% resultado aun segunda función que calcula la raiz cuadrada...
+% entrada y salida deberían ser iguales al final
 
 x=entrada^2;
 
-%%%%llamada a la segunda función%%%%
+%%%%    llamada a la segunda función%%%%
 salida=raiz(x);
 
-%%%%%%codigo de la segunda funcion%%%%%
+%%%%%%    codigo de la segunda funcion%%%%%
 function out=raiz(in)
 disp('version incluida en el archivo ejemplo2.m')
 out=in^(1/2);
@@ -2357,11 +2357,11 @@ function a=uno(b)
 ...
 
 function c=dos(d)
-%aqui viene el codigo de la funcion dos
+% aqui viene el codigo de la funcion dos
 ...
 
 function e=tres(f)
-%aqui viene el codigo de la funcion dos
+% aqui viene el codigo de la funcion dos
 ...
 .
 .
@@ -2439,12 +2439,12 @@ Siempre que escribimos un programa, tanto si se trata de un \emph{script} como s
 \item Errores de sintaxis. \index{Error! De sintáxis}Normalmente son errores de escritura. Hemos escrito mal el nombre de una función o un comando o bien no hemos escrito correctamente el código siguiendo las reglas del lenguaje. Matlab advierte directamente de estos errores, cuando se trata de ejecutar el código, escribiendo en la ventana de comandos un mensaje de error. Como ejemplo veamos los errores del siguiente \texttt{script},
 
 \begin{lstlisting}
-%script con errores,
-y=[1 2 3; 4 5 6; 2 3] %a esta matriz le falta un elemento en la última fila
+% script con errores,
+y=[1 2 3; 4 5 6; 2 3] % a esta matriz le falta un elemento en la última fila
 
 x=[1 2 3; 4 5 6]
-z=y*x %las matrices no pueden multiplicarse entre si por que no coinciden
-      %numero de columnas de la primera con numero de filas de la segunda
+z=y*x % las matrices no pueden multiplicarse entre si por que no coinciden
+      % numero de columnas de la primera con numero de filas de la segunda
 \end{lstlisting}
 
 Si observamos el editor de textos, figura \ref{fig:ederror}, puede observarse algunas de los caracteres del texto subrayados en rojo. Esto puede indicar la existencia de errores en esa línea de código, como en el caso del carácter que se ha rodeado en la figura de un círculo rojo. 
@@ -2480,11 +2480,12 @@ Matlab ha detectado el error en la construcción de la matriz \texttt{y}, nos ind
 Si corregimos el código, añadiendo a la matriz \texttt{y} el elemento que le falta,
 
 \begin{lstlisting}
-%script con errores,
-y=[1 2 3; 4 5 6; 2 3 8] %Ultima fila completada
+% script con errores,
+y=[1 2 3; 4 5 6; 2 3 8] % Ultima fila completada
 x=[1 2 3; 4 5 6]
-z=y*x %las matrices no pueden multiplicarse entre si por que no coinciden
-      %numero de columnas de la primera con numero de filas de la segunda
+z=y*x % las matrices no pueden multiplicarse entre si por que no 
+      % coinciden numero de columnas de la primera con numero de
+      % filas de la segunda
 \end{lstlisting}
 y volvemos a ejecutar el script.
 \begin{verbatim}
@@ -2508,7 +2509,7 @@ columns in the first matrix matches the number of rows in the second matrix.
 To perform elementwise multiplication, use '.*'.
 
 Error in errores (line 5)
-z=y*x %las matrices no pueden multiplicarse entre si por que no coinciden
+z=y*x % las matrices no pueden multiplicarse entre si por que no coinciden
 
 \end{verbatim}
 Matlab nos detecta el siguiente error cometido así como la línea en la que se comete. Es interesante notar que, aunque  se trata de un error de sistaxis, el editor de textos no puede detectarlo y, por tanto, no nos muestra ningún carácter subrrayado en rojo, asociado a él.
@@ -2549,30 +2550,30 @@ z =
 
 El siguiente código del script \texttt{trect.m} muestra un error de este tipo, 
 
-\begin{verbatim}
-%este script toma los valores de los catetos de un triángulo rectangulo del 
-%workspace de matlab (variables a y b). calcula su hipotenusa, y a partir
-%de estos datos, el seno el coseno y la tangente del angulo formado por la
-%hipotenusa y el cateto mayor que será siempre a
+\begin{lstlisting}
+% este script toma los valores de los catetos de un triángulo rectangulo del 
+% workspace de matlab (variables a y b). calcula su hipotenusa, y a partir
+% de estos datos, el seno el coseno y la tangente del angulo formado por la
+% hipotenusa y el cateto mayor que será siempre a
 
-%calculo hipotenusa,
+% calculo hipotenusa,
 
 h=sqrt(a^2+b^2)
 
-%calculo del seno
+% calculo del seno
 
 s=a/h
 
-%calculo del coseno
-a=b/h %error estamos sobreescribiendo el valor del coseno en la variable  
+% calculo del coseno
+a=b/h % error estamos sobreescribiendo el valor del coseno en la variable  
       % que guardaba e valor del cateto
 
-%calculo de la tangente
+% calculo de la tangente
 t=b/a
 
-\end{verbatim}
+\end{lstlisting}
 
-\lstinputlisting{../codigo/matlab/introduccion/trect.m}
+%\lstinputlisting{../codigo/matlab/introduccion/trect.m}
 
 El programa funciona perfectamente, por ejemplo si hacemos \texttt{a=4} y \texttt{b}=3,
 
@@ -2668,21 +2669,21 @@ Para ello, podríamos hacer uso de la función \texttt{rem} (ver tabla \ref{tabfun
 
 \paragraph{if - elseif - else - end.} El mecanismo que necesitamos nos lo suministra la estructura \texttt{if} de Matlab. Veamos en primer lugar el código del ejemplo del que venimos hablando,
 
-\begin{verbatim}
+\begin{lstlisting}
 function espar(x)
-%Este programa recibe un numero entero como variable de entrada. y muestra
-%por pantalla un mensaje indicando si el numero recibido es par o impar.
+% Este programa recibe un numero entero como variable de entrada. y muestra
+% por pantalla un mensaje indicando si el numero recibido es par o impar.
 
-%Calculamos el resto de la division por dos
+% Calculamos el resto de la division por dos
 resto=rem(x,2);
 
-%Empleamos una estructura if - else -end para decidir que mensaje mostrar
+% Empleamos una estructura if - else -end para decidir que mensaje mostrar
 
 if resto==0
-    %si el resto es cero el número es par
+    % si el resto es cero el número es par
     disp('el número es par')
 end
-\end{verbatim}
+\end{lstlisting}
 
 El programa toma un número como variable de entrada y calcula el resto de su división entre dos. A continuación entra en una parte de código especial, que se inicia con la palabra clave \texttt{if} y termina con la palabra clave \texttt{end}. 
 
@@ -2691,52 +2692,52 @@ La palabra clave \texttt{if} va siempre seguida de una expresión que da un resul
 En nuestro ejemplo, se emplea una expresión relacional sencilla \texttt{resto==0}. Si se cumple, el programa ejecutará la siguiente línea de programa, escribiendo en la ventana de comandos la frase ``el número es par"  si no se cumple el programa se la salta, llega hasta el \texttt{end}, y no escribe nada por pantalla. 
 
 Acabamos de ver la estructura condicional \texttt{if} más sencilla posible. Podríamos complicarla un poco pidiendo que también nos saque un mensaje por pantalla cuando el número sea impar. Esto supone incluir en nuestro programa una disyuntiva; si es par el programa debe hacer una cosa y si no, debe hacer otra. Para incluir este tipo de disyuntivas en una estructura \texttt{if}, se emplea la palabra clave \texttt{else}. Veamos nuestro ejemplo modificado,
-\begin{verbatim}
+\begin{lstlisting}
 function espar(x)
-%Este programa recibe un numero entero como variable de entrada. y muestra
-%por pantalla un mensaje indicando si el numero recibido es par o impar.
+% Este programa recibe un numero entero como variable de entrada. y muestra
+% por pantalla un mensaje indicando si el numero recibido es par o impar.
 
-%Calculamos el resto de la division por dos
+% Calculamos el resto de la division por dos
 resto=rem(x,2);
 
-%Empleamos una estructura if - else -end para decidir que mensaje mostrar
+% Empleamos una estructura if - else -end para decidir que mensaje mostrar
 
 if resto==0
-    %si el resto es cero el número es par
+    % si el resto es cero el número es par
     disp('el número es par')
 else
-    %si el resto no es cero el número es impar
+    % si el resto no es cero el número es impar
     disp('el número es impar')
 end 
-\end{verbatim}
+\end{lstlisting}
 
 La palabra clave \texttt{else} marca ahora la disyuntiva, si el número es par, el programa ejecuta las líneas de código entre el \texttt{if} y el \texttt{else}, si el número no es par ejecutará las líneas entre el \texttt{else} y el \texttt{end}.
 
 La estructura \texttt{if} admite todavía ampliar el número de posibilidades de elección mediante la palabra clave \texttt{elseif}. Al igual que  con \texttt{if}, \texttt{elseif} va seguido de una expresión lógica que establece una condición, si se cumple se ejecutará el código de las líneas siguientes, si no se cumple, el programa saltará a la siguiente línea que contenga una palabra clave: otro \texttt{elseif}, un \texttt{else} o directamente el \texttt{end} que marca el final de la parte de código condicional. Para ver cómo funciona, vamos a modificar nuestro ejemplo anterior, para que, si el número introducido no es divisible por dos, compruebe si es divisible por tres,
 
-\begin{verbatim}
+\begin{lstlisting}
 function divis(x)
-%Este programa recibe un numero entero como variable de entrada. y muestra
-%por pantalla un mensaje indicando si el numero recibido es par. Si no es
-%par, comprueba si es divisible por 3 y si lo es muestra un mensaje por  
-%pantalla indicandolo. Si no es par ni divisible por tres muestra un
-%mensaje diciendo que no es par ni disible por tres. 
+% Este programa recibe un numero entero como variable de entrada. y muestra
+% por pantalla un mensaje indicando si el numero recibido es par. Si no 
+% es par, comprueba si es divisible por 3 y si lo es muestra un mensaje   
+% por pantalla indicandolo. Si no es par ni divisible por tres muestra un
+% mensaje diciendo que no es par ni disible por tres. 
 
 
 
-%Empleamos una estructura if-elseif-else-end para decidir que mensaje mostrar
+% Empleamos una estructura if-elseif-else-end para decidir que mensaje mostrar
 
 if rem(x,2)==0
-    %si el resto es cero el número es par
+    % si el resto es cero el número es par
     disp('el número es par')
 elseif rem(x,3)==0
-    %El número es divisible por tres
+    % El número es divisible por tres
     disp('el número es divisible por 3')
 else
-    %el numero no es par ni divisible por tres
+    % el numero no es par ni divisible por tres
     disp('el número no es par ni divisible por 3')
 end
-\end{verbatim}
+\end{lstlisting}
 
 Si llamamos ahora a la función dando como valor de entrada un número par, Ejecutará el código situado debajo del \texttt{if} y antes del \texttt{elseif} y se saltará todo lo demás hasta llegar al \texttt{end}. Si el número introducido no es par, pero es divisible por tres, se saltará el código situado por debajo del \texttt{if}, ejecutará el código contenido debajo del \texttt{elseif} hasta el \texttt{else} y saltará el resto del código hasta llegar al \texttt{end}. Por último si el número no es par ni divisible por tres, solo ejecutará el código situado por debajo del \texttt{else}.
 
@@ -2773,35 +2774,35 @@ end};
 \paragraph{Estructuras if anidadas.}\index{Anidación! If anidado} 
 En el ejemplo anterior, hemos visto cómo, si el número introducido en la función era par y además divisible por tres, el programa nunca nos informaría de esta segunda propiedad, debido al carácter excluyente de la estructura \emph{if}. Una manera de resolver este problema, es mediante el uso de estructuras \texttt{if} anidadas. La idea es muy sencilla, se construye una estructura \texttt{if} para comprobar una determinada condición, si esta se cumple, dentro de su código se construye otra estructura if para comprobar una segunda condición, y así sucesivamente, todas las veces que sea necesario. Si modificamos nuestro ejemplo anterior, incluyendo un \texttt{if} anidado,
 
-\begin{verbatim}
+\begin{lstlisting}
 function divis23(x)
-%Este programa recibe un numero entero como variable de entrada. y muestra
-%por pantalla un mensaje indicando si el numero recibido es par. 
-%si el numero es par y divisible entre tres,
-%si es divisible entre tres  
-%Si no es par ni divisible por tres 
+% Este programa recibe un numero entero como variable de entrada. y 
+% muestra por pantalla un mensaje indicando si el numero recibido es par. 
+% si el numero es par y divisible entre tres,
+% si es divisible entre tres  
+% Si no es par ni divisible por tres 
 
 
 
-%Empleamos una estructura if - else -end 
-%y un if anidado para decidir que mensaje mostrar
+% Empleamos una estructura if - else -end 
+% y un if anidado para decidir que mensaje mostrar
 
 if rem(x,2)==0
-    %si el resto es cero el número es par
-    %comprobamos con un if anidado si además es divisible entre tres
+    % si el resto es cero el número es par
+    % comprobamos con un if anidado si además es divisible entre tres
     if rem(x,3)==0
         disp('el número es par y divisible entre tres')
     else
         disp('el número es par')
     end
 elseif rem(x,3)==0
-    %El número es divisble entre tres
+    % El número es divisble entre tres
     disp('el número es divisible entre 3')
 else
-    %el numero no es par ni divisible entre tres
+    % el numero no es par ni divisible entre tres
     disp('el número no es par ni divisible entre tres')
 end
-\end{verbatim}
+\end{lstlisting}
 
 \paragraph{Switch-case-otherwise.} \index{Flujo! Switch-case}Se trata de otra estructura que permite también ejecutar una parte u otra de código de acuerdo con unas codiciones preestablecida. Estas condiciones se presentan en forma de \emph{casos}, el programa comprueba al llegar a la estructura \texttt{switch} de qué caso se trata y ejecuta el código correspondiente. La figura \ref{fig:switch} muestra la forma general que toma una estructura \texttt{switch}.
 
@@ -2809,17 +2810,17 @@ La estructura \texttt{switch}, compara el valor contenido en la variable de entr
 
 Veamos un ejemplo muy sencillo,
 
-\begin{verbatim}
+\begin{lstlisting}
 function signo(x)
-%este programa emplea una estructura switch para informarnos del signo de
-%un número.
+% este programa emplea una estructura switch para informarnos del signo de
+% un número.
 
-%NOTA EL PROGRAMA NO COMPRUEBA QUE LA VARIABLE DE ENTRADA X SEA UN NUMERO,
-%SI ES UN VECTOR O UNA MATRIZEL RESULTADO NO TIENE SENTIDO
+% NOTA EL PROGRAMA NO COMPRUEBA QUE LA VARIABLE DE ENTRADA X SEA UN NUMERO,
+% SI ES UN VECTOR O UNA MATRIZ EL RESULTADO NO TIENE SENTIDO
   
-s=sign(x); %obtnemos el signo del número mediante la función sign
+s=sign(x); % obtnemos el signo del número mediante la función sign
 
-%construimos la estructura switch,
+% construimos la estructura switch,
 
 switch s
     case 1
@@ -2830,7 +2831,7 @@ switch s
         disp('el número es cero')
 end
 
-\end{verbatim}
+\end{lstlisting}
 
 \begin{figure}[h]
 \centering
@@ -2882,19 +2883,19 @@ end};
 \end{figure} 
  
 El bucle empieza con la palabra clave for, seguida de una variable a la que hemos dado el nombre genérico de índice. Esta variable irá tomando sucesivamente los valores de los elementos contenidos en el [vector de valores]. El código contenido en el bucle, desde la línea siguiente al \texttt{for} hasta el \texttt{end} se ejecutará tantas veces como valores tenga el vector de valores. Antes de hablar de las sentencias \texttt{break} y \texttt{continue}, veamos alguno ejemplos.
-\begin{verbatim}
+\begin{lstlisting}
 function y=demofor(x)
-%este programa emplea un bucle for sencillo para ir mostrando uno a uno
-%los elementos del vector de entrada x por pantalla. además los suma y 
-%guarda el resultado total en el vector y,
+% este programa emplea un bucle for sencillo para ir mostrando uno 
+% a uno los elementos del vector de entrada x por pantalla. además  
+% los suma y guarda el resultado total en el vector y,
 
-y=0; %iniciamos la suma a cero
+y=0; % iniciamos la suma a cero
 
 for i=x
     disp(i)
     y=y+i;
 end
-\end{verbatim}
+\end{lstlisting}
 
 Si ejecutamos el programa, usando como entrada el vector \texttt{d=[1 9 4 18]},
 
@@ -2928,39 +2929,39 @@ for indice=principio:incremento:final
 \end{verbatim}
 
 Veamos un ejemplo sencillo para obtener el vector suma de dos vectores,
-\begin{verbatim}
+\begin{lstlisting}
 function s=sumafor(x,y)
-%este programa emplea un bucle for sencillo para sumar dos vectores
-%primero comprueba si son del mismo tamaño. Si no lo son da un mensaje de
-%aviso
+% este programa emplea un bucle for sencillo para sumar dos vectores
+% primero comprueba si son del mismo tamaño. Si no lo son da un mensaje 
+% de aviso
 
 l1=length(x);
 l2=length(y);
 if l1==l2
-    %construimos un vector de ceros del mismo tamaño que x e y paraa
-    %guardar el resultado de la suma,
+    % construimos un vector de ceros del mismo tamaño que x e y paraa
+    % guardar el resultado de la suma,
     s=zeros(size(x));
-    %si son iguales los suma elemento a elemento usando un bucle for
+    % si son iguales los suma elemento a elemento usando un bucle for
     for i=1:l1
         s(i)=x(i)+y(i);
     end
 else
     disp('los vectores son de distinto tamaño')
 end
-\end{verbatim}
+\end{lstlisting}
 
 En la figura \ref{fig:for}, aparecen dos sentencias opcionales, \texttt{break} y \texttt{continue}.
 
 La sentencia \texttt{break}, permite terminar el bucle \texttt{for} antes de que haya terminado de realizar todas las ejecuciones previstas. La sentencia break va siempre incluida dentro de una condición que, si se cumple interrumpe la ejecución del bucle. Por ejemplo, podemos emplear un bucle \texttt{for} y una sentencia \texttt{break}, para buscar la primera vez que un determinado número aparece en un vector,
 
-\begin{verbatim}
+\begin{lstlisting}
 function posicion=buscanum(x,n)
-%este programa emplea un bucle for y un break para buscar en el vector x, 
-%la primera vez que aparece el número n
+% este programa emplea un bucle for y un break para buscar en el  
+% vector x, la primera vez que aparece el número n
 
-%obtenemos la longitud del vector
+% obtenemos la longitud del vector
 l1=length(x);
-%iniciamos la variable posicion a un valor absurdo
+% iniciamos la variable posicion a un valor absurdo
 posicion=-1;
 for i=1:l1
     if x(i)==n
@@ -2971,20 +2972,20 @@ end
 if posicion==-1
     disp('el numero pedido no se encuentra en el vector x') 
 end
-\end{verbatim} 
+\end{lstlisting} 
 
 El programa toma como variables de entrada un vector y el número que debe buscar dentro del vector. Construye un bucle \texttt{for}, con el mismo número de iteraciones que el tamaño del vector. El bucle va comparando los elementos del vector con el número pedido. Cuando encuentra un elemento igual, se ejecuta el código de la estructura if contenida en el bucle; la variable posición toma el valor del índice \texttt{i} del bucle y la sentencia \texttt{break} interrumpe la ejecución del bucle, saltando al final del mismo. Por último, se ha añadido una condición al terminar el bucle, para el caso de que se hayan recorrido todos los elementos del vector sin encontrar el número pedido.
 
 La sentencia \texttt{continue}, se emplea para hacer que una determinada iteración interrumpa su ejecución y salte directamente al comienzo de la siguiente iteración. Debe ir, como en el caso de la sentencia \texttt{break}, incluida en una estructura condicional. Veamos un ejemplo para entender como funciona. Se trata de un programa que admite como entrada un vector de cualquier longitud y devuelve como salida otro vector que contiene solo los números pares contenidos en el vector de entrada,
 
-\begin{verbatim}
+\begin{lstlisting}
 function pares=buscapar(x)
-%este programa emplea un bucle for y un continue para construir un vector
-%de salida con los numeros pares contenidos en el vector de entrada.
+% este programa emplea un bucle for y un continue para construir un 
+% vector de salida con los numeros pares contenidos en el vector de entrada.
 
-%obtenemos la longitud del vector
+% obtenemos la longitud del vector
 l1=length(x);
-%iniciamos el vector de salida a un vector vacío,
+% iniciamos el vector de salida a un vector vacío,
 pares=[];
 for i=1:l1
     if rem(x(i),2)~=0
@@ -2992,39 +2993,39 @@ for i=1:l1
     end
     pares=[pares x(i)];
 end
-\end{verbatim}
+\end{lstlisting}
 
 El funcionamiento es muy sencillo, en cada iteración la sentencia \texttt{if} comprueba si el número es par. Si no lo es, entra en el código de la estructura \texttt{if}, ejecuta la sentencia \texttt{continue}, y se salta el resto del código del bucle, volviendo directamente a empezar la siguiente iteración.
 
 \paragraph{bucles for anidados.} \index{Anidación!For anidado}Los bucles \texttt{for} pueden anidarse unos dentro de otros de modo análogo a como se hace con las estructuras \texttt{if}. Veamos un ejemplo de uso, muy común; calcular la suma de dos matrices,
 
-\begin{verbatim}
+\begin{lstlisting}
 function s=suma_mat(x,y)
-%este programa emplea dos bucles for anidados para obtener la suma de dos
-%matrices.
+% este programa emplea dos bucles for anidados para obtener la suma de 
+% dos matrices.
 
-%obtenemos el tamaño de las matrices,
+% obtenemos el tamaño de las matrices,
 t1=size(x);
 t2=size(y);
 if t1(1)==t2(1)&& t1(2)==t2(2)
-    %si las matrices tienen el mismo tamaño pueden sumarse...
-    %construimos una matriz de dicho tamaño para guardar el resultado de
-    %la suma
+    % si las matrices tienen el mismo tamaño pueden sumarse...
+    % construimos una matriz de dicho tamaño para guardar el 
+    % resultado de la suma
     s=zeros(size(x));
-    %construimos un bucle que recorre las filas de ambas matrices
+    % construimos un bucle que recorre las filas de ambas matrices
     for i=1:t1(1)
-        %y dentro, anidamos un bucle que recorre las columnas
+        % y dentro, anidamos un bucle que recorre las columnas
         for j=1:t1(2)
-            %Empleando ambos índices para ir sumando los elementos de las
-            %dos matrices,
+            % Empleando ambos índices para ir sumando los elementos 
+            % de las dos matrices,
             s(i,j)=x(i,j)+y(i,j);
         end
     end
 else
-    %si no tienen el mismo tamaño no se pueden sumar...
+    % si no tienen el mismo tamaño no se pueden sumar...
     disp('las matrices no son del mismo tamaño')
 end
-\end{verbatim} 
+\end{lstlisting} 
 
 Es interesante observar en este ejemplo el funcionamiento de los dos bucles anidados. Cada interación del bucle exterior, avanza una fila, en el recorrido de las matrices, cada iteración del bucle interior recorre todos los elementos de la fila indicada por el bucle exterior.
 
@@ -3051,23 +3052,23 @@ end};
 
 Veamos un ejemplo sencillo. 
 
-\begin{verbatim}
+\begin{lstlisting}
 function n=potencia(x,max)
-%este programa emplea un bucle while para calcular la potencia a la que hay
-%que elevar un número x para que el resultado sea mayor que otro
-%determinado número max
-%un número.
+% este programa emplea un bucle while para calcular la potencia a 
+% la que hay que elevar un número x para que el resultado sea mayor 
+% que otro determinado número max
+% un número.
 
-%NOTA EL PROGRAMA NO COMPRUEBA QUE LA VARIABLE DE ENTRADA X SEA UN NUMERO,
-%Si ES UN VECTOR O UNA MATRIZ EL RESULTADO NO TIENE SENTIDO
+% NOTA EL PROGRAMA NO COMPRUEBA QUE LA VARIABLE DE ENTRADA X SEA UN NUMERO,
+% Si ES UN VECTOR O UNA MATRIZ EL RESULTADO NO TIENE SENTIDO
   
 pot=1;
 n=0;
-while pot<max %mientras la potencia calculada sea menor que max
+while pot<max % mientras la potencia calculada sea menor que max
     n=n+1;
     pot=x^n;
 end
-\end{verbatim}
+\end{lstlisting}
 
 El programa emplea un bucle \texttt{while} para calcular el exponente mínimo al que hay que elevar un número para que rebase una determinada cantidad. El bucle while se ejecuta mientras la potencia calculada sea menor que la variable \texttt{max}; una vez que la potencia rebasa dicho valor el bucle deja de ejecutarse. Un aspecto muy importante del bucle \texttt{while} es que al programarlo hay que asegurarse de que dentro del bucle existe la posibilidad de cambiar la condición de entrada. Si no, el programa no podrá terminar nunca el bucle\footnote{Cuando se produce esta situación por un error en el diseño del programa, el bucle se puede parar pulsando a la vez las teclas ctrl+c}.
 
@@ -3075,37 +3076,37 @@ Las sentencias \texttt{break} y \texttt{continue} son idénticas a las descritas 
 
 \paragraph{Bucles while anidados.} \index{Anidación! While anidado} Del mismo modo que se anidan los bucles \texttt{for}, es posible anidar bucles \texttt{while}. Como un ejemplo, vamos a reproducir el programa desarrollado antes para sumar dos matrices, empleando ahora bucles \texttt{while}.
 
-\begin{verbatim}
+\begin{lstlisting}
 function s=suma_while(x,y)
-%este programa emplea dos bucles while anidados para obtener la suma de dos
-%matrices.
+% este programa emplea dos bucles while anidados para obtener la 
+% suma de dos matrices.
 
-%obtenemos el tamaño de las matrices,
+% obtenemos el tamaño de las matrices,
 t1=size(x);
 t2=size(y);
 if t1(1)==t2(1)&& t1(2)==t2(2)
-    %si las matrices tienen el mismo tamaño pueden sumarse...
-    %construimos una matriz de dicho tamaño para guardar el resultado de
-    %la suma
+    % si las matrices tienen el mismo tamaño pueden sumarse...
+    % construimos una matriz de dicho tamaño para guardar el 
+    % resultado de la suma
     s=zeros(size(x));
-    %construimos un bucle que recorre las filas de ambas matrices
-    i=1; %inicimos un contador para las filas
+    % construimos un bucle que recorre las filas de ambas matrices
+    i=1; % inicimos un contador para las filas
     while i<=t1(1)
-        %y dentro, anidamos un bucle que recorre las columnas
-        j=1; %iniciamos un contador para las columnas
+        % y dentro, anidamos un bucle que recorre las columnas
+        j=1; % iniciamos un contador para las columnas
         while j<=t1(2)
-            %Empleando ambos índices para ir sumando los elementos de las
-            %dos matrices,
+            % Empleando ambos índices para ir sumando los elementos 
+            % de las dos matrices,
             s(i,j)=x(i,j)+y(i,j);
-            j=j+1; %vamos incrementando el indice de columnas
+            j=j+1; % vamos incrementando el indice de columnas
         end
-        i=i+1; %vamos incrementando el indice de filas
+        i=i+1; % vamos incrementando el indice de filas
     end
 else
-    %si no tienen el mismo tamaño no se pueden sumar...
+    % si no tienen el mismo tamaño no se pueden sumar...
     disp('las matrices no son del mismo tamaño')
 end
-\end{verbatim}
+\end{lstlisting}
 
 El ejemplo, es más complicado de programar y menos eficiente que si usáramos bucles \texttt{for}. La razón de incluirlo es puramente ilustrativa. En general, un bucle \texttt{while} debe utilizarse solo cuando el número de iteraciones que se precisa realizar no es fijo, sino que depende de alguna condición propia de los resultados que se van obteniendo a medida que se van realizando iteraciones.
 
@@ -3343,59 +3344,59 @@ Es posible crear varias figuras distintas empleando directamente el comando \tex
 El siguiente script muestra un ejemplo del uso de \texttt{figure} y \texttt{plot} combinados.
 
 \begin{lstlisting}
-%este script  (figuras.m)muestra el uso de los comandos figure y plot para pintar
-%varias funciones se aconseja copiarlo y probarlo en Matlab para entender
-%mejor cómo funciona.
+% este script  (figuras.m)muestra el uso de los comandos figure y plot 
+% para pintar varias funciones se aconseja copiarlo y probarlo en 
+% Matlab para entender mejor cómo funciona.
 
-%vamos a pintar un trozo de la función e^x, en concreto para el intervalo
-%x=[0,1]
+% vamos a pintar un trozo de la función e^x, en concreto para el 
+% intervalo x=[0,1]
 
-%Construimos un vector de 100 puntos equiespaciados en el intervalo [0,1]
+% Construimos un vector de 100 puntos equiespaciados en el intervalo [0,1]
 
 x=linspace(0,1,100);
 
-%calculamos el valor de la funcion e^x para los puntos construidos,
+% calculamos el valor de la funcion e^x para los puntos construidos,
 
 y1=exp(x);
 
-%pintamos los puntos y frente a x,
+% pintamos los puntos y frente a x,
 
-plot(x,y1) %plot ha construido una figura en Matlab, la figura 1.
+plot(x,y1) % plot ha construido una figura en Matlab, la figura 1.
 
-%Construimos una segunda figura en Matlab
-figure %se ha construido la figura 2
+% Construimos una segunda figura en Matlab
+figure % se ha construido la figura 2
 
-%construimos una tercera figura 
-figure %se ha construido la figura 3
+% construimos una tercera figura 
+figure % se ha construido la figura 3
 
 
-%calculamos los valores que tomará la función sin(2*pi*x) para los puntos
-%x del intervalo [0,1] que ya tenemos
+% calculamos los valores que tomará la función sin(2*pi*x) para los 
+% puntos x del intervalo [0,1] que ya tenemos
 y2=sin(2*pi*x);
 
-%hacemos activa la figura 2
+% hacemos activa la figura 2
 figure(2)
-%pintamos en esta figura los puntos de la función sin...
+% pintamos en esta figura los puntos de la función sin...
 
 plot(x,y2)
 
-%volvemos a hacer activa la figura 1
+% volvemos a hacer activa la figura 1
 figure(1)
-%pintamos ahora los puntos de la de la función y=e^x, pero invertidos x
-%frente a y, La grafica anterior se borra y es sustituida por la nueva,
+% pintamos ahora los puntos de la de la función y=e^x, pero invertidos 
+% x frente a y, La grafica anterior se borra y es sustituida por la nueva,
 plot(y1,x)
 
-%creamos una nueva figura asignándole un numero al crearla,
+% creamos una nueva figura asignándole un numero al crearla,
 figure(13)
 
-%volvemos activar la figura 3
+% volvemos activar la figura 3
 figure(3)
 
-%volvemos a pintar, ahora en la figura 3, la función y=e^x,
+% volvemos a pintar, ahora en la figura 3, la función y=e^x,
 plot(x,y1)
 
-%volvemos a activar la figura 13 y pintamos en ella de nuevo la funcion
-%sin..
+% volvemos a activar la figura 13 y pintamos en ella de nuevo la 
+% funcion sin..
 
 figure(13)
 plot(x,y2)
@@ -3404,27 +3405,27 @@ plot(x,y2)
 Como se ha señalado antes, cualquier comando gráfico que se ejecute borra por defecto el contenido anterior de la figura activa. Es posible cambiar este comportamiento, empleando para ello el comando \texttt{hold}. Si en la ventana de comandos escribimos \texttt{hold on}, a partir de ese momento la ventana activa mantendrá cualquier gráfico que contenga y añadirá a este los nuevos gráficos que se creen. Este comportamiento se mantiene hasta que vuelva a escribirse en la ventana de comandos la sentencia \texttt{hold off}. El siguiente script muestra un ejemplo del uso de este comando y La figura \ref{fig:sico} el gráfico resultante.
 
 \begin{lstlisting}
-%ejemplo de uso de hold on para representar dos funciones en el mismo
-%gráfico
+% ejemplo de uso de hold on para representar dos funciones en el mismo
+% gráfico
 
-%vamos a representar las funciones seno y coseno en el intervalo [-pi, pi]
+% vamos a representar las funciones seno y coseno en el intervalo [-pi, pi]
 
-%creamos un vector de 100 puntos en el intervalo,
+% creamos un vector de 100 puntos en el intervalo,
 x=[-pi:2*pi/99:pi];
 
-%calculamos el valor de la función seno sobre los puntos x
+% calculamos el valor de la función seno sobre los puntos x
 seno=sin(x);
 
-%calculamos el valor de la función coseno sobre los puntos x
+% calculamos el valor de la función coseno sobre los puntos x
 coseno=cos(x);
 
-%pintamos la funcion seno, con linea continua azul
+% pintamos la funcion seno, con linea continua azul
 plot(x,seno)
 
-%le pedimos que mantenga el gráfico creado
+% le pedimos que mantenga el gráfico creado
 hold on
 
-%pintamos encima la función coseno en linea continua roja
+% pintamos encima la función coseno en linea continua roja
 
 plot(x,coseno,'r')
 
@@ -3440,94 +3441,94 @@ plot(x,coseno,'r')
 
 Es posible también incluir varios gráficos separados en la misma figura. 
 Para ello se emplea el comando \texttt{subplot(i,j,k)}. Este comando divide la figura en un total de $i\times j$ gráficos y activa el situado en la posición $k$, las posiciones se cuentan fila a fila de arriba a abajo. El siguiente script muestra el uso del comando \texttt{subplot} La figura \ref{fig:subplot} muestra el resultado obtenido.
-
-
-\begin{lstlisting}
-%Este script muestra el uso del comando subplot
-
-%vamos a crear una figura con 2X3=6 gráficas, se disponen en la figura como
-%si fueran los elementos de una matriz...
-%usamos el comando subplot de modo que cree el primer eje de los 6
-subplot(2,3,1)
-
-%definimos un vector x de puntos equiespacios en el intervalo (-1,1)
-x=linspace(-1,1,20);
-
-%calculamos los valores de polinomio 3x^2+2^x-1
-y=3*x.^2+2*x-1;
-
-%dibujamos la función en los ejes
-plot(x,y)
-
-%Añadimos rótulos a los ejes
-xlabel('eje x')
-ylabel('eje y')
-%Añadimos un titulo al grafico
-title('gráfico 1')
-
-%Generamos los siguientes ejes (a la derecha del anterior)
-subplot(2,3,2)
-%dibujamos la misma función pero ahora en linea discontinua roja
-plot(x,y,':r')
-
-%Añadimos rótulos a los ejes
-xlabel('eje x')
-ylabel('eje y')
-%Añadimos un titulo al grafico
-title('gráfico 2')
-
-%Generamos los siguientes ejes (a la derecha del anterior)
-subplot(2,3,3)
-%dibujamos la misma función pero ahora en linea de punto y raya negra
-plot(x,y,'-.k')
-
-%Añadimos rótulos a los ejes
-xlabel('eje x')
-ylabel('eje y')
-%Añadimos un titulo al grafico
-title('gráfico 3')
-
-%Generamos los siguientes ejes (debajo de los primeros)
-subplot(2,3,4)
-%dibujamos la misma función pero ahora solo con circulos azules
-plot(x,y,'o')
-
-%Añadimos rótulos a los ejes
-xlabel('eje x')
-ylabel('eje y')
-%Añadimos un titulo al grafico
-title('gráfico 4')
-
-%Generamos los siguientes ejes (a la derecha del anterior)
-subplot(2,3,5)
-%dibujamos la misma función pero ahora solo con cruce rojas
-plot(x,y,'+r')
-
-%Añadimos rótulos a los ejes
-xlabel('eje x')
-ylabel('eje y')
-%Añadimos un titulo al grafico
-title('gráfico 5')
-
-%Generamos los últimos ejes (a la derecha del anterior)
-subplot(2,3,6)
-%dibujamos la misma función pero ahora en linea continua y asteriscos
-%negros
-plot(x,y,'-*k')
-
-%Añadimos rótulos a los ejes
-xlabel('eje x')
-ylabel('eje y')
-%Añadimos un titulo al grafico
-title('gráfico 6')
-\end{lstlisting}
-
 \begin{figure}[h]
 \centering
 \includegraphics[width=12cm]{subplot.eps}
 \caption{Ejemplo de empleo del comando subplot}
 \label{fig:subplot}
 \end{figure}
+
+
+\begin{lstlisting}
+% Este script muestra el uso del comando subplot
+
+% vamos a crear una figura con 2X3=6 gráficas, se disponen en la figura 
+% como si fueran los elementos de una matriz...
+% usamos el comando subplot de modo que cree el primer eje de los 6
+subplot(2,3,1)
+
+% definimos un vector x de puntos equiespacios en el intervalo (-1,1)
+x=linspace(-1,1,20);
+
+% calculamos los valores de polinomio 3x^2+2^x-1
+y=3*x.^2+2*x-1;
+
+% dibujamos la función en los ejes
+plot(x,y)
+
+% Añadimos rótulos a los ejes
+xlabel('eje x')
+ylabel('eje y')
+% Añadimos un titulo al grafico
+title('gráfico 1')
+
+% Generamos los siguientes ejes (a la derecha del anterior)
+subplot(2,3,2)
+% dibujamos la misma función pero ahora en linea discontinua roja
+plot(x,y,':r')
+
+% Añadimos rótulos a los ejes
+xlabel('eje x')
+ylabel('eje y')
+% Añadimos un titulo al grafico
+title('gráfico 2')
+
+% Generamos los siguientes ejes (a la derecha del anterior)
+subplot(2,3,3)
+% dibujamos la misma función pero ahora en linea de punto y raya negra
+plot(x,y,'-.k')
+
+% Añadimos rótulos a los ejes
+xlabel('eje x')
+ylabel('eje y')
+% Añadimos un titulo al grafico
+title('gráfico 3')
+
+% Generamos los siguientes ejes (debajo de los primeros)
+subplot(2,3,4)
+% dibujamos la misma función pero ahora solo con circulos azules
+plot(x,y,'o')
+
+% Añadimos rótulos a los ejes
+xlabel('eje x')
+ylabel('eje y')
+% Añadimos un titulo al grafico
+title('gráfico 4')
+
+% Generamos los siguientes ejes (a la derecha del anterior)
+subplot(2,3,5)
+% dibujamos la misma función pero ahora solo con cruce rojas
+plot(x,y,'+r')
+
+% Añadimos rótulos a los ejes
+xlabel('eje x')
+ylabel('eje y')
+% Añadimos un titulo al grafico
+title('gráfico 5')
+
+% Generamos los últimos ejes (a la derecha del anterior)
+subplot(2,3,6)
+% dibujamos la misma función pero ahora en linea continua y asteriscos
+% negros
+plot(x,y,'-*k')
+
+% Añadimos rótulos a los ejes
+xlabel('eje x')
+ylabel('eje y')
+% Añadimos un titulo al grafico
+title('gráfico 6')
+\end{lstlisting}
+
 
 En el ejemplo, se ha hecho usos de algunos comandos para gráficos que permiten introducir títulos. Estos son: 
 
@@ -3549,6 +3550,12 @@ ylabel('distancia en metros')
 
 \subsection{Gráficos en 2D} \index{Gráficos! Comandos gráficos en 2D}
 Hasta ahora, hemos visto tan solo el comando \texttt{plot}, que nos ha servido para introducir las capacidades gráficas en Matlab. Como hemos visto, plot permite representar gráficamente colecciones de datos en dos dimensiones. Hay otros muchos comandos que permiten obtener representaciones \emph{especializadas} de datos en dos dimensiones. A continuación veremos algunos de los más destacables.
+\begin{figure}[h]
+\centering
+\includegraphics[width=12cm]{wave.eps}
+\caption{Ejemplo de empleo del comando \texttt{fplot}}
+\label{fig:wave}
+\end{figure} 
 
 \paragraph{fplot.} Permite dibujar directamente una función en un intervalo de valores. El nombre de la función hay que introducirlo entre comillas simples y el intervalo como un vector de dos componentes. Por ejemplo,
 
@@ -3561,14 +3568,8 @@ dibuja la función,
 f(x)=e^{-x^2}\cos(6\pi x)
 \end{equation*}
 
-en el intervalo $[-3,3]$ (figura \ref{fig:wave}.
+en el intervalo $[-3,3]$ (figura \ref{fig:wave}).
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=12cm]{wave.eps}
-\caption{Ejemplo de empleo del comando \texttt{fplot}}
-\label{fig:wave}
-\end{figure} 
  
 \paragraph{semilogx.} El comando \texttt{semilog} representa el eje de las x en escala logarítmica, Es decir, en lugar de representar frente a la variable $x$, se representa frente a $\log_{10}(x)$. Si dibujamos empleando este tipo de gráfico la función $y=\log_{10}(x)$ deberíamos obtener una línear recta de pendiente unidad. La figura \ref{fig:slx} muestra el resultado, empleando para las \emph{equis} el intervalo $(0,1)$.
 \begin{verbatim}
@@ -3990,8 +3991,8 @@ A continuación obtenemos la matriz de coordenadas z, aplicando la función a los 
 
 \begin{figure}[h]
 \centering
-\subfigure[Función $z=x^3+y^2$ representada con \texttt{mesh}\label{fig:msh}]{\includegraphics[width=8.5cm]{pa23.eps}} \qquad 
-\subfigure[Función $z=x^3+y^2$ representada con \texttt{surf} \label{fig:sur}]{\includegraphics[width=8.5cm]{surf.eps}}\\
+\subfigure[Función $z=x^3+y^2$ representada con \texttt{mesh}\label{fig:msh}]{\includegraphics[width=8cm]{pa23.eps}} %\qquad 
+\subfigure[Función $z=x^3+y^2$ representada con \texttt{surf} \label{fig:sur}]{\includegraphics[width=8cm]{surf.eps}}\\
 \caption{Comparación entre \texttt{mesh} y \texttt{surf}}
 \end{figure}
 

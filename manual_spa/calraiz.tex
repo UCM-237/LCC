@@ -591,22 +591,22 @@ x =
 
 Pero además podemos usarla como variable de entrada para otra función, tal y como se muestra en el siguiente código,
 
-\begin{verbatim}
+\begin{lstlisting}
 function pinta_funcion(fun,intervalo)
-%Esta función dibuja la gráfica de una funcion cualquiera (fun) en un
-%itervalo dado (intervalo). fun debe ser un handle de la función que se
-%quiere pintar. intervalo debe ser un vector que contenga los extremos del
-%intervalo que se desea pintar.
+% Esta función dibuja la gráfica de una funcion cualquiera (fun) en un
+% itervalo dado (intervalo). fun debe ser un handle de la función que se
+% quiere pintar. intervalo debe ser un vector que contenga los extremos del
+% intervalo que se desea pintar.
 
-%Construimos cien puntos en el intevalo dado,
+% Construimos cien puntos en el intevalo dado,
 x=linspace(intervalo(1),intervalo(2),100);
 
-%calculamos el valor de la funcion en los puntos del intervalo,
+% calculamos el valor de la funcion en los puntos del intervalo,
 y=fun(x);
 
-%dibujamos la gráfica
+% dibujamos la gráfica
 plot(x,y)
-\end{verbatim}
+\end{lstlisting}
 
 La función \texttt{pinta\_funcion} nos dibujará la gráfica de cualquier función en el intervalo indicado. p realizar ara ello bastará crear un \emph{handle} de la función que se quiere dibujar y pasarlo a la función \texttt{pinta\_fun} como una variable de entrada. Así por ejemplo, si escribimos en Matlab,
 
@@ -619,16 +619,16 @@ Se obtendrá la gráfica de la función seno en el intervalo pedido.
 
 Podemos asignar \emph{handles} no solo a las funciones internas de Matlab sino a cualquier función que escribamos. Por ejemplo, en los métodos descritos más arriba para obtener raíces de funciones, usamos la función $f(x)=e^x-x^2$ como función de prueba. podemos crear un fichero que implemente esta función,
 
-\begin{verbatim}
+\begin{lstlisting}
 function y=prueba(x)
-%esta es una funcioncilla de prueba para los algoritmos de obtención de
-%raíces
+% esta es una funcioncilla de prueba para los algoritmos de obtención de
+% raíces
 y=exp(x)-x.^2;
-\end{verbatim}
+\end{lstlisting}
 
 Si guardamos el fichero, con el nombre prueba.m en el directorio de trabajo, podemos ahora asignar un \emph{handle} a nuestra función,
 \begin{verbatim}
-mifuncion=@prueba realizar 
+mifuncion=@prueba 
 \end{verbatim}
 
 Y a continuación, podemos emplear el programa \texttt{pinta\_fun} para representa la función en un intervalo, por ejemplo $[-2 2]$ que contenga la raíz,
@@ -647,7 +647,7 @@ El resultado se muestra en la figura \ref{fig:handle}
 \end{figure}
 
 \paragraph{la función \texttt{feval} de Matlab.} Esta función suministra un método indirecto para calcular los resultados de una función cualquiera.  Su sintaxis es la siguiente,
-\begin{verbatim} realizar 
+\begin{verbatim} 
 [y1, y2, ..., ym]=feval('fun', x1, x2, ...,xn)
 \end{verbatim}
 
@@ -673,22 +673,22 @@ y =
 
 \texttt{feval} suministra un método alternativo al uso de \emph{handles} para crear y manejar \emph{funciones de funciones}. Para ver un ejemplo, el siguiente código muestra una versión alternativa del programa \texttt{pinta\_funcion}, empleando la función \texttt{feval},
 
-\begin{verbatim}
+\begin{lstlisting}
 function pinta_funcion2(fun,intervalo)
-%Esta función dibuja la gráfica de una funcion cualquiera (fun) en un
-%itervalo dado (intervalo). fun debe ser una cadena de caractéres que contengan exáctamente el nombre de la función (fun) que se 
-%quiere pintar. intervalo debe ser un vector que contenga los extremos del
-%intervalo que se desea pintar.
+% Esta función dibuja la gráfica de una funcion cualquiera (fun) en un
+% itervalo dado (intervalo). fun debe ser una cadena de caractéres que contengan exáctamente el nombre de la función (fun) que se 
+% quiere pintar. intervalo debe ser un vector que contenga los extremos del
+% intervalo que se desea pintar.
 
-%Construimos cien puntos en el intevalo dado,
+% Construimos cien puntos en el intevalo dado,
 x=linspace(intervalo(1),intervalo(2),100);
 
-%calculamos el valor de la funcion en los puntos del intervalo, EMPLEANDO LA FUNCION feval
+% calculamos el valor de la funcion en los puntos del intervalo, EMPLEANDO LA FUNCION feval
 y=feval(fun,x);
 
-%dibujamos la gráfica
+% dibujamos la gráfica
 plot(x,y)
-\end{verbatim}
+\end{lstlisting}
 
 Para representar la función seno en el intervalo $-\frac{\pi}{2}, \frac{\pi}{2}$, empleando esta nueva función, introducimos en Matlab,
 

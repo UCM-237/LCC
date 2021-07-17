@@ -381,39 +381,39 @@ Si repetimos este mismo proceso hasta llegar a la última ecuación del sistema, $
 
 EL siguiente código calcula la solución de un sistema triangular inferior mediante sustituciones progresivas,
 
-\begin{verbatim}
+\begin{lstlisting}
 function x = progresivas(A,b)
-%Esta Función permite obtener la solucion de un sistema triangular inferior
-%empleando sustituciones progresivas. La variables de entrada son la matriz
-%de coeficientes A  y el vector de terminos independientes b. la solucion se
-%devuelve como un vector columna en la varible x
+% Esta Función permite obtener la solucion de un sistema triangular inferior
+% empleando sustituciones progresivas. La variables de entrada son la matriz
+% de coeficientes A  y el vector de terminos independientes b. la solucion se
+% devuelve como un vector columna en la varible x
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%Obtenemos el tamaño de la matriz de coeficientes y comprobamos que es
-%cuadrada,
+% Obtenemos el tamaño de la matriz de coeficientes y comprobamos que es
+% cuadrada,
 [f,c]=size(A);
 if f~=c
     error('la matriz de coeficientes no es cuadrada')
 end
-%construimos un vector solucion, inicialmente formado por ceros,
+% construimos un vector solucion, inicialmente formado por ceros,
 x=zeros(f,1);
-%construimos un bucle for para ir calculando progresivamente las soluciones
-%del sistema
+% construimos un bucle for para ir calculando progresivamente las soluciones
+% del sistema
 for i=1:f
-    %primero igualamos la solución al termino independiente de la ecuación
-    %que toque...
+    % primero igualamos la solución al termino independiente de la ecuación
+    % que toque...
     x(i)=b(i)
-    %y luego creamos un bucle para ir restando todas las soluciones
-    %anteriores...
+    % y luego creamos un bucle para ir restando todas las soluciones
+    % anteriores...
     for j=1:i-1
     x(i)=x(i)-A(i,j)*x(j)
     end
-    %para terminar dividimos por el elemento de la diagonal de la matriz de
-    %coeficientes...
+    % para terminar dividimos por el elemento de la diagonal de la matriz de
+    % coeficientes...
     x(i)=x(i)/A(i,i)
 end
-\end{verbatim}
+\end{lstlisting}
 
 \paragraph{Sistemas triangulares superiores: método de sustituciones regresivas.} En este caso, el sistema general de $n$ ecuaciones con $n$ incógnitas tendrá la forma general,
 
@@ -1070,22 +1070,22 @@ x =
 
 El programa \texttt{eligauss}, presenta el problema de que no incluye el pivoteo de filas. Como se explicó en el capítulo anterior este en necesario para evitar que un cero o un valor relativamente pequeño en la diagonal, impida completar el proceso de eliminación o haga los cálculos inestables. A continuación, incluimos una versión modificada de \texttt{eligauss} que incluye el pivoteo de filas.
 
-\begin{verbatim}
+\begin{lstlisting}
 function U=eligaussp(A)
-%Esta función obtiene una matriz triangular superior, a partir de una
-%matriz dada, aplicando el método de eliminación gaussiana.
-%realiza pivoteo de filas, así que lo primero que hace es comprobar si el
-%el elemento de la diagonal, de la fila que se va a emplear para eliminar
-%el mayor que los que tiene por debajo en su columna, si no es así,
+% Esta función obtiene una matriz triangular superior, a partir de una
+% matriz dada, aplicando el método de eliminación gaussiana.
+% realiza pivoteo de filas, así que lo primero que hace es comprobar si el
+% el elemento de la diagonal, de la fila que se va a emplear para eliminar
+% el mayor que los que tiene por debajo en su columna, si no es así,
 % intercambia la fila con la que tenga el elemento mayor en dicha columna.
 
-%Obtenemos el número de filas de la matriz..
+% Obtenemos el número de filas de la matriz..
 nf=size(A,1);
 U=A;
 %
-for j=1:nf-1 %recorro todas la columnas menos la última
-%%%%%%%%%%%pivoteo de filas%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
-    %Buscamos el elemento mayor de la columna j de la diagonal para abajo
+for j=1:nf-1 % recorro todas la columnas menos la última
+%%%%%   pivoteo de filas%%%%%%%%%%%%%%%%%%%%%%%%%%    
+    % Buscamos el elemento mayor de la columna j de la diagonal para abajo
     maxcol=abs(U(j,j));
     index=j;
     for l=j:nf
@@ -1094,21 +1094,21 @@ for j=1:nf-1 %recorro todas la columnas menos la última
             index=l;
         end
     end
-    %si el mayor no era el elemento de la diagonal U(j,j), intecambiamos la
-    %fila l con la fila j
+    % si el mayor no era el elemento de la diagonal U(j,j), intecambiamos la
+    % fila l con la fila j
     if index~=j
         aux=U(j,:);
         U(j,:)=U(index,:);
         U(index,:)=aux;
     end
-%%%%%%%%fin del pivoteo de filas%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
-    for i=j+1:nf %Recorro las filas desde debajo de la diagonal hasta la 
-        %última en Matlab tengo la suerte de poder manejar cada fila de un 
-        %solo golpe.
+%%%%%    fin del pivoteo de filas%%%%%%%%%%%%%%%%%%%%%    
+    for i=j+1:nf % Recorro las filas desde debajo de la diagonal hasta la 
+        % última en Matlab tengo la suerte de poder manejar cada fila de un 
+        % solo golpe.
         U(i,:)=U(i,:)-U(j,:)*U(i,j)/U(j,j);
     end
 end
-\end{verbatim}
+\end{lstlisting}
 
 Si aplicamos esta función a nuestro ejemplo de siempre,
 \begin{verbatim}
@@ -1226,21 +1226,21 @@ x_3
 
 El siguiente programa \texttt{gauss-jordan}, añade las líneas de código necesarias a \texttt{eligaussp} para realizar la eliminación de Gauss-Jordan completa de una matriz.
 
-\begin{verbatim}
+\begin{lstlisting}
 function U=gauss_jordan(A)
-%Esta función realiza  la eliminación de GAUSS-JORDAN, que permite obtener,
-%a partir de una matriz dada, una matriz cuyos elementos por encima y 
-%debajo de la diagonal son todos cero.
+% Esta función realiza  la eliminación de GAUSS-JORDAN, que permite obtener,
+% a partir de una matriz dada, una matriz cuyos elementos por encima y 
+% debajo de la diagonal son todos cero.
 
-%Obtenemos el número de filas de la matriz..
+% Obtenemos el número de filas de la matriz..
 nf=size(A,1);
 U=A;
 %
-%primera parte: reducción a una matriz triangular pro eliminación
-%progresiva
-for j=1:nf-1 %recorro todas la columnas menos la última
-%%%%%%%%%%%pivoteo de filas%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
-    %Buscamos el elemento mayor de la columna j de la diagonal para abajo
+% primera parte: reducción a una matriz triangular pro eliminación
+% progresiva
+for j=1:nf-1 % recorro todas la columnas menos la última
+%%%%%%     pivoteo de filas%%%%%%%%%%%%%%%%%%%%%%%%    
+    % Buscamos el elemento mayor de la columna j de la diagonal para abajo
     maxcol=abs(U(j,j));
     index=j;
     for l=j:nf
@@ -1249,33 +1249,33 @@ for j=1:nf-1 %recorro todas la columnas menos la última
             index=l;
         end
     end
-    %si el mayor no era el elemento de la diagonal U(j,j), intecambiamos la
-    %fila l con la fila j
+    % si el mayor no era el elemento de la diagonal U(j,j), intecambiamos la
+    % fila l con la fila j
     if index~=j
         aux=U(j,:);
         U(j,:)=U(index,:);
         U(index,:)=aux;
     end
-%%%%%%%%fin del pivoteo de filas%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
-    for i=j+1:nf %Recorro las filas desde debajo de la diagonal hasta la 
-        %última en Matlab tengo la suerte de poder manejar cada fila de un 
-        %solo golpe.
+%%%%    fin del pivoteo de filas%%%%%%%%%%%%%%%%%%%%%%    
+    for i=j+1:nf % Recorro las filas desde debajo de la diagonal hasta la 
+        % última en Matlab tengo la suerte de poder manejar cada fila de un 
+        % solo golpe.
         U(i,:)=U(i,:)-U(j,:)*U(i,j)/U(j,j);
     end
 end
 
 
-%segunda parte, obtención de una matriz diagonal mediante eliminación
-%regresiva, Recorremos ahora las columnas en orden inverso empezando por el
-%final... (Eliminación de Gauss Jordan)
+% segunda parte, obtención de una matriz diagonal mediante eliminación
+% regresiva, Recorremos ahora las columnas en orden inverso empezando por el
+% final... (Eliminación de Gauss Jordan)
 
 for j=nf:-1:2
-    for i=j-1:-1:1 %Recorro las filas desde encima de la diagonal hasta la
-        %primera, 
+    for i=j-1:-1:1 % Recorro las filas desde encima de la diagonal hasta la
+        % primera, 
         U(i,:)=U(i,:)-U(j,:)*U(i,j)/U(j,j);
     end
 end
-\end{verbatim}
+\end{lstlisting}
 
 Si tras aplicar la eliminación de Gauss-Jordan a la matriz ampliada de un sistema, dividimos cada fila por el elemento que ocupa la diagonal principal, obtendríamos en la última columna las soluciones del sistema. En nuestro ejemplo,
 
@@ -1427,23 +1427,23 @@ x_i^{(s+1)}=\frac{b_i-\sum_{j\neq i}a_{ij}x_j^{(s)}}{a_{ii}}
 
 A continuación, incluimos el código correspondiente al cálculo de una iteración del algoritmo de Jacobi. Este código es el que corresponde, para el método de jacobi, a la función $M(\cdot)$ del diagrama de flujo de la figura \ref{fig:itera}.
 
-\begin{verbatim}
+\begin{lstlisting}
  	xs=xs1;
-    %volvemos a inicializar el vector de soluciones al valor de los
-    %terminos independientes
+    % volvemos a inicializar el vector de soluciones al valor de los
+    % terminos independientes
     xs1=b; 
-    for i=1:n %bucle para recorrer todas las ecuaciones
-        for j=1:i-1 %restamos la contribucion de todas las incognitas
-            xs1(i)=xs1(i)-A(i,j)*xs(j);       %por encima de x(i)
+    for i=1:n % bucle para recorrer todas las ecuaciones
+        for j=1:i-1 % restamos la contribucion de todas las incognitas
+            xs1(i)=xs1(i)-A(i,j)*xs(j);       % por encima de x(i)
         end
-        for j=i+1:n %restamos la contribución de todas las incognitas
-            %por debajo de x(i)
+        for j=i+1:n % restamos la contribución de todas las incognitas
+            % por debajo de x(i)
             xs1(i)=xs1(i)-A(i,j)*xs(j);
         end
-        %dividimos por el elemento de la diagonal,
+        % dividimos por el elemento de la diagonal,
         xs1(i)=xs1(i)/A(i,i);
     end
-\end{verbatim}
+\end{lstlisting}
 
 \paragraph{Expresión matricial para el método de Jacobi.} \index{Método de Jacobi! Expresión matricial} El método de Jacobi que acabamos de exponer puede expresarse también en forma matricial. En Matlab, el empleo en forma matricial, tiene la ventaja de ahorrar bucles en el cálculo de la nueva solución a partir de la anterior. Si expresamos un sistema general de orden $n$ en forma matricial,
 
@@ -1767,35 +1767,35 @@ xs1=f+H*xs
 
 En el siguiente fragmento de código se reúnen todas las operaciones descritas,
 
-\begin{verbatim}
+\begin{lstlisting}
 ...
 ...
-%obtenemos el tamaño del sistema,
+% obtenemos el tamaño del sistema,
 
 n=size(A,1);
-%creamos un vector de soluciones inicial,
+% creamos un vector de soluciones inicial,
 xs=zeros(n,1);
-%creamos las matrices del método
+% creamos las matrices del método
 D=diag(diag(A));
 U=A-tril(A);
 L=A-triu(A);
-%ALternativamente para jacobi podemos crear una solo matriz equivalente a
-%L+U, LpU=A-D
+% ALternativamente para jacobi podemos crear una solo matriz equivalente a
+% L+U, LpU=A-D
 f=D^-1*b;
 H=-D^-1*(L+U);
 
-%calculamos la primera iteración,
+% calculamos la primera iteración,
 xs1=f+H*xs;
-%calculamos la diferencia entre las dos soluciones,
+% calculamos la diferencia entre las dos soluciones,
 tolf=norm(xs1-xs);
-%ponemos a 1 el contador de iteraciones.
+% ponemos a 1 el contador de iteraciones.
 it=1;
 
-%a partir de aquí vendría el código necesario para calcular las
-%sucesivas iteraciones hasta que la solución converja
+% a partir de aquí vendría el código necesario para calcular las
+% sucesivas iteraciones hasta que la solución converja
 ...
 ...
-\end{verbatim}
+\end{lstlisting}
 
 \subsection{El método de Gauss-Seidel.} \index{Método de Gauss-Seidel}
 \paragraph{Obtención del algoritmo.} Este método aplica una mejora, sencilla y lógica al método de Jacobi que acabamos de estudiar. Si volvemos a escribir la expresión general para calcular una iteración de una de las componentes de la solución de un sistema por el método de Jacobi,
@@ -1831,27 +1831,27 @@ x_i^{(s+1)}=\frac{b_i-\sum_{j< i}a_{ij}x_j^{(s+1)}-\sum_{j> i}a_{ij}x_j^{(s)}}{a
 
 El siguiente código de Matlab implementa una iteración del método de Gauss-Seidel y puede considerarse como la función $M(\cdot)$, incluida en el diagrama de flujo de la figura \ref{fig:itera}, para dicho método.
 
-\begin{verbatim}
+\begin{lstlisting}
     xs=xs1;
-    %volvemos a inicializar el vector de soluciones al valor de los
-    %terminos independientes
+    % volvemos a inicializar el vector de soluciones al valor de los
+    % terminos independientes
     xs1=b; 
-    for i=1:n %bucle para recorrer todas las ecuaciones
-        for j=1:i-1 %restamos la contribucion de todas las incognitas
-            xs1(i)=xs1(i)-A(i,j)*xs1(j);       %por encima de x(i)
+    for i=1:n % bucle para recorrer todas las ecuaciones
+        for j=1:i-1 % restamos la contribucion de todas las incognitas
+            xs1(i)=xs1(i)-A(i,j)*xs1(j);       % por encima de x(i)
         end
-        for j=i+1:n %restamos la contribución de todas las incognitas
-            %por debajo de x(i)
+        for j=i+1:n % restamos la contribución de todas las incognitas
+            % por debajo de x(i)
             xs1(i)=xs1(i)-A(i,j)*xs(j);
         end
-        %dividimos por el elemento de la diagonal,
+        % dividimos por el elemento de la diagonal,
         xs1(i)=xs1(i)/A(i,i);
     end
-     %calculamos la diferencia entre las dos soluciones,
+     % calculamos la diferencia entre las dos soluciones,
         tolf=norm(xs1-xs);
-        %incrementamos el contador de iteraciones
+        % incrementamos el contador de iteraciones
         it=it+1;
-\end{verbatim}
+\end{lstlisting}
 
 Es interesante destacar, que el único cambio en todo el código respecto al método de Jacobi es la sustitución de la variable \texttt{xs(j)} por la variable \texttt{xs1(j)} al final del primer bucle for anidado.
 
@@ -1877,15 +1877,15 @@ x^{(s+1)}= (D+L)^{-1}\cdot b-(D+L)^{-1}\cdot U\cdot x^{(s)}
 Igual que hemos hecho en con el método de Jacobi, podemos identificar las partes fijas que no cambian al iterar: $f=(D+L)^{-1}\cdot b$ y la matriz del método, que en este caso es, $H=-(D+L)^{-1}\cdot U$.
 
 El siguiente fragmento de código muestra la construcción de las matrices necesarias para implementar en Matlab el método de Gauss-Seidel,
-\begin{verbatim}
+\begin{lstlisting}
 ...
 ...
-%obtenemos el tamaño del sistema,
+% obtenemos el tamaño del sistema,
 
 n=size(A,1);
-%creamos un vector de soluciones inicial,
+% creamos un vector de soluciones inicial,
 xs=zeros(n,1);
-%calculamos las matrices necesarias
+% calculamos las matrices necesarias
 
 D=diag(diag(A));
 U=A-tril(A);
@@ -1894,16 +1894,16 @@ L=A-triu(A);
 f=(D+L)^(-1)*b;
 H=-(D+L)^(-1)*U
 
-%calculamos la primera iteración
+% calculamos la primera iteración
 xs1=f+H*xs;
-%calculamos la diferencia entre las dos soluciones,
+% calculamos la diferencia entre las dos soluciones,
 tolf=norm(xs1-xs);
-%ponemos a 1 el contador de iteraciones.
+% ponemos a 1 el contador de iteraciones.
 it=1;
 
-%A partir de aquí vendría el código necesario para calcular las 
-%Sucesivas iteraciones hasta que la solución converja.
-\end{verbatim}
+% A partir de aquí vendría el código necesario para calcular las 
+% Sucesivas iteraciones hasta que la solución converja.
+\end{lstlisting}
 
 En general, el método de Gauss-Seidel es capaz de obtener soluciones, para un sistema dado y un cierto valor de tolerancia, empleando menos iteraciones que el método de Jacobi. Por ejemplo, si aplicamos ambos métodos a la resolución del sistema,
 
@@ -1948,27 +1948,27 @@ x_i^{(s+1)}=\omega\cdot \overbrace{\frac{b_i-\sum_{j\neq i}a_{ij}x_j^{(s)}}{a_{i
 
 Para implementarlo en Matlab, bastaría añadir al código del método de Jacobi una línea incluyendo el promedio entre las dos soluciones sucesivas,
 
-\begin{verbatim}
+\begin{lstlisting}
 while norm(xs1-xs)>tol
  	xs=xs1;
-    %volvemos a inicializar el vector de soluciones al valor de los
-    %terminos independientes
+    % volvemos a inicializar el vector de soluciones al valor de los
+    % terminos independientes
     xs1=b; 
-    for i=1:n %bucle para recorrer todas las ecuaciones
-        for j=1:i-1 %restamos la contribucion de todas las incognitas
-            xs1(i)=xs1(i)-A(i,j)*xs(j);       %por encima de x(i)
+    for i=1:n % bucle para recorrer todas las ecuaciones
+        for j=1:i-1 % restamos la contribucion de todas las incognitas
+            xs1(i)=xs1(i)-A(i,j)*xs(j);       % por encima de x(i)
         end
-        for j=i+1:n %restamos la contribución de todas las incognitas
-            %por debajo de x(i)
+        for j=i+1:n % restamos la contribución de todas las incognitas
+            % por debajo de x(i)
             xs1(i)=xs1(i)-A(i,j)*xs(j);
         end
-        %dividimos por el elemento de la diagonal,
+        % dividimos por el elemento de la diagonal,
         xs1(i)=xs1(i)/A(i,i);
     end
-    %promediamos la solución obtenida con la anterior (amortiguamiento)
+    % promediamos la solución obtenida con la anterior (amortiguamiento)
     xs1=w*xs1+(1-w)*xs
 end
-\end{verbatim}
+\end{lstlisting}
 
 En forma matricial, la expresión general del método de Jacobi amortiguado sería,
 
@@ -1985,36 +1985,36 @@ Podemos identificar fácilmente el termino fijo, $f=\omega\cdot D^{-1}\cdot b$ y 
 
 Para implementar el código del método de Jacobi amortiguado en Matlab, debemos calcular la matriz identidad del tamaño de sistema y modificar las expresiones de $f$ y $H$,
 
-\begin{verbatim}
+\begin{lstlisting}
 ...
 ...
-%obtenemos el tamaño del sistema,
+% obtenemos el tamaño del sistema,
 
 n=size(A,1);
-%creamos un vector de soluciones inicial,
+% creamos un vector de soluciones inicial,
 xs=zeros(n,1);
-%creamos las matrices del método
+% creamos las matrices del método
 D=diag(diag(A));
 U=A-tril(A);
 L=A-triu(A);
 I=eye(n);
-%Alternativamente para jacobi podemos crear una solo matriz equivalenta a
-%L+U, LpU=A-D
+% Alternativamente para jacobi podemos crear una solo matriz equivalenta a
+% L+U, LpU=A-D
 f=w*D^-1*b;
 H=-w*D^-1*(L+U)+(1-w)*I;
 
-%calculamos la primera iteración,
+% calculamos la primera iteración,
 xs1=f+H*xs;
-%calculamos la diferencia entre las dos soluciones,
+% calculamos la diferencia entre las dos soluciones,
 tolf=norm(xs1-xs);
-%ponemos a 1 el contador de iteraciones.
+% ponemos a 1 el contador de iteraciones.
 it=1;
 
-%a partir de aquí vendría el código necesario para calcular las
-%sucesivas iteraciones hasta que la solución converja
+% a partir de aquí vendría el código necesario para calcular las
+% sucesivas iteraciones hasta que la solución converja
 ...
 ...
-\end{verbatim}
+\end{lstlisting}
 
 \paragraph{El método SOR.} \index{Método SOR}El método SOR --\emph{Succesive OverRelaxation}-- se obtiene aplicando amortiguamiento al método de Gauss-Seidel. Aplicando el mismo razonamiento que el caso de Jacobi amortiguado, la expresión general para una iteración del método SOR es,
 
@@ -2024,29 +2024,29 @@ x_i^{(s+1)}=\omega\cdot \overbrace{\frac{b_i-\sum_{j< i}a_{ij}x_j^{(s+1)}-\sum_{
 
 Al igual que en el caso de Jacobi amortiguado, para implementar en Matlab el método SOR es suficiente añadir una línea que calcule el promedio de dos soluciones sucesivas,
 
-\begin{verbatim}
+\begin{lstlisting}
     xs=xs1;
-    %volvemos a inicializar el vector de soluciones al valor de los
-    %terminos independientes
+    % volvemos a inicializar el vector de soluciones al valor de los
+    % terminos independientes
     xs1=b; 
-    for i=1:n %bucle para recorrer todas las ecuaciones
-        for j=1:i-1 %restamos la contribucion de todas las incognitas
-            xs1(i)=xs1(i)-A(i,j)*xs1(j);       %por encima de x(i)
+    for i=1:n % bucle para recorrer todas las ecuaciones
+        for j=1:i-1 % restamos la contribucion de todas las incognitas
+            xs1(i)=xs1(i)-A(i,j)*xs1(j);       % por encima de x(i)
         end
-        for j=i+1:n %restamos la contribución de todas las incognitas
-            %por debajo de x(i)
+        for j=i+1:n % restamos la contribución de todas las incognitas
+            % por debajo de x(i)
             xs1(i)=xs1(i)-A(i,j)*xs(j);
         end
-        %dividimos por el elemento de la diagonal,
+        % dividimos por el elemento de la diagonal,
         xs1(i)=xs1(i)/A(i,i);
     end
-     %amortiguamos la solución
+     % amortiguamos la solución
       xs1=w*xs1+(1-w)*xs;
-     %calculamos la diferencia entre las dos soluciones,
+     % calculamos la diferencia entre las dos soluciones,
         tolf=norm(xs1-xs);
-        %incrementamos el contador de iteraciones
+        % incrementamos el contador de iteraciones
         it=it+1;
-\end{verbatim}
+\end{lstlisting}
 
 En forma matricial la expresión para una iteración del método SOR sería,
 \begin{equation*}
@@ -2063,13 +2063,13 @@ De nuevo, podemos identificar, el término fijo, $f=\omega\cdot\left((D+L)^{-1}\c
 
 El siguiente fragmento de código muestra la obtención de $f$ y $H$ para el método SOR,
 
-\begin{verbatim}
-%obtenemos el tamaño del sistema,
+\begin{lstlisting}
+% obtenemos el tamaño del sistema,
 
 n=size(A,1);
-%creamos un vector de soluciones inicial,
+% creamos un vector de soluciones inicial,
 xs=zeros(n,1);
-%calculamos las matrices necesarias
+% calculamos las matrices necesarias
 
 D=diag(diag(A));
 U=A-tril(A);
@@ -2081,14 +2081,14 @@ f=w*(D+L)^(-1)*b;
 H=(1-w)*I-w*(D+L)^(-1)*U;
 
 
-%calculamos la primera iteración
+% calculamos la primera iteración
 xs1=f+H*xs;
 
-%calculamos la diferencia entre las dos soluciones,
+% calculamos la diferencia entre las dos soluciones,
 tolf=norm(x-x0);
-%ponemos a 1 el contador de iteraciones.
+% ponemos a 1 el contador de iteraciones.
 it=1;
-\end{verbatim}
+\end{lstlisting}
 
 \subsection{Análisis de convergencia}\index{Análisis de convergencia}
 En la introducción a los métodos iterativos dejamos abierta la cuestión de su convergencia. Vamos a analizar en más detalle en qué condiciones podemos asegurar que un método iterativo, aplicado a un sistema de ecuaciones lineales concreto, converge. 
@@ -2408,7 +2408,7 @@ x_1\\ x_2\\ x_3\\ x_4
 
 Clasifica los tres métodos de mejor a peor, tomando como criterio el número de iteraciones empleado por cada uno de ellos para alcanzar la solución.
 
-%\item {\bf 2 puntos.} \textcolor{red}{Define el error de la solución propuesta en la iteración $s$ con respecto al valor real de la solución $x$, esto es, $e^{(s)} = x^{(s)} - x$. Halla la matriz $W\in\mathbb{R}^{n\times n}$ que satisface:}
+% \item {\bf 2 puntos.} \textcolor{red}{Define el error de la solución propuesta en la iteración $s$ con respecto al valor real de la solución $x$, esto es, $e^{(s)} = x^{(s)} - x$. Halla la matriz $W\in\mathbb{R}^{n\times n}$ que satisface:}
 %	\begin{equation}
 %		e^{(s+1)} = We^{(s)}.
 %		\label{eq: error}

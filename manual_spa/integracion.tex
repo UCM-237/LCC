@@ -374,21 +374,21 @@ En este caso también se divide el intervalo en $n$ subintervalos pero ahora se h
 
 A continuación se incluye un código que permite permite aproximar la integral definida de una función en un intervalo por cualquiera de los tres métodos descritos: Trapecio, Simpson o Simpson $3/8$,
 
-\begin{verbatim}
+\begin{lstlisting}
 function int=integra(fun,met,inter,dib)
-%implementa los metodos del trapecio, etc...
-%Uso: int=integra(fun,inter,dib)
-%fun, nombre de la función que se desea intergrar, debe ir entre comillas
-%met, método que se desea emplear para calcular la integral. los nombres
-%validos para los metodos son: 'trapecio', 'simpson' y simpsom38'
-%inter, es un vector de dos elementos que contiene lo extremos de intervalo
-%de integracion [a,b]
-%dib, si se da un valor a esta variable de entrada, dibuja la función en el
-%intervalo de integración y la integral obtenida. Si se omite no dibuja
-%nada.
-%int, valor de la integral obtenida.
-%Este programa no divide el intervalo de integración en subintervalos...
-%para calcular la integral empleando subintervalos usar la función trocea,
+% implementa los metodos del trapecio, etc...
+% Uso: int=integra(fun,inter,dib)
+% fun, nombre de la función que se desea intergrar, debe ir entre comillas
+% met, método que se desea emplear para calcular la integral. los nombres
+% validos para los metodos son: 'trapecio', 'simpson' y simpsom38'
+% inter, es un vector de dos elementos que contiene lo extremos de intervalo
+% de integracion [a,b]
+% dib, si se da un valor a esta variable de entrada, dibuja la función en el
+% intervalo de integración y la integral obtenida. Si se omite no dibuja
+% nada.
+% int, valor de la integral obtenida.
+% Este programa no divide el intervalo de integración en subintervalos...
+% para calcular la integral empleando subintervalos usar la función trocea,
 
 if strcmp(met,'trapecio')
     f0=feval(fun,inter(1));
@@ -439,19 +439,19 @@ else
     int='metodo desconocido, los metodos conocidos son ''trapecio'', ...
     ''simpson' y ''simpsom38'''
 end
-\end{verbatim}
+\end{lstlisting}
 
 Este programa aplica directamente el método deseado sobre el intervalo de integración. Para obtener los métodos extendidos, podemos emplear un segundo programa que divida el intervalo de integración inicial en el número de subintervalos que deseemos, aplique el programa anterior a cada subintervalo, y, por último, sume todo los resultados para obtener el valor de la integral en el intervalo deseado. El siguiente programa, muestra un ejemplo de como hacerlo,
 
-\begin{verbatim}
+\begin{lstlisting}
 function total=trocea(fun,met,inter,div,dib)
-%esta funcion lo unico que hace es trocear un intervalo en el numero de
-%tramos indicados por div, y llamar a la funcion integra para que integre
-%en cada intervalo.
-%USO: total=trocea(fun,met,inter,div,dib)
-% las variables de emtrada son la mismas que las de integra, salvo div que
-% representa el numero de subintervalos en que se desea dividir el
-% intervalo de integración.
+% esta funcion lo unico que hace es trocear un intervalo en el numero de
+% tramos indicados por div, y llamar a la funcion integra para que integre
+% en cada intervalo.
+% USO: total=trocea(fun,met,inter,div,dib)
+%  las variables de emtrada son la mismas que las de integra, salvo div que
+%  representa el numero de subintervalos en que se desea dividir el
+%  intervalo de integración.
 tramos=inter(1):(inter(2)-inter(1))/div:inter(2);
 total=0;
 if nargin==5
@@ -462,7 +462,7 @@ for i=1:size(tramos,2)-1
     total=total+int;
 end
 hold off
-\end{verbatim}t
+\end{lstlisting}t
 
 Por último indicar que Matlab posee un comando propio para calcular la integral definida de una función, el comando \texttt{quad}. Este comando admite como variables de entrada el nombre de una función, y dos valores que representan los límites de integración. Como variable de salida devuelve el valor de la integral definida en el intervalo introducido. Por ejemplo,
 
@@ -551,13 +551,13 @@ x_{i+1}&=x_i+hf(a+ih,x_i)
 
 El siguiente código implementa el método de Euler para resolver un problema de condiciones iniciales de primer orden a partir de una función $f(t)$ y un valor inicial $x_0$.
 
-\begin{verbatim}
-%inicial o valor inicial de la variable independiente (t). 
-%b, instante de tiempo final o valor final de la variable independiente
-%h paso de integración
-%podemos por elemental prudencia, comprobar que b>a
-%lo elegante no es pasar el paso como he hecho aqui, sino tcalcularlo en
-%funcion de cuantos puntos de la solucion queremos en el intervalo...
+\begin{lstlisting}
+% inicial o valor inicial de la variable independiente (t). 
+% b, instante de tiempo final o valor final de la variable independiente
+% h paso de integración
+% podemos por elemental prudencia, comprobar que b>a
+% lo elegante no es pasar el paso como he hecho aqui, sino tcalcularlo en
+% funcion de cuantos puntos de la solucion queremos en el intervalo...
 if a>=b
     y='el intervalo debe ser creciente, para evitarse lios';
     return
@@ -570,9 +570,9 @@ while t(paso)<=b
     y(paso+1)=y(paso)+h*feval(fun,t(paso),y(paso));
     paso=paso+1;
 end
-%dibuja la solucion,
+% dibuja la solucion,
 plot(t,y)
-\end{verbatim}
+\end{lstlisting}
 
 Un ejemplo sencillo de problema de condiciones iniciales de primer orden, nos los suministra la ecuación diferencial de la carga y descarga de un condensador eléctrico. La figura \ref{fig:RC}, muestra un circuito eléctrico elemental formado por una resistencia $R$ en serie con un condensador $C$. \index{Circuito RC}
 
@@ -620,25 +620,24 @@ V_0(t)=V_i\left(1-e^{-t/R\cdot C}\right)
 \end{equation*} 
 
 
-Podemos resolver el problema de la carga del condensador, empleando el código de la función de Euler incluido más arriba. Lo único que necesitamos es definir una función de Matlab  para representar la función $f(x,t)$ de nuestro problema de valor inicial,
-t
-\begin{verbatim}
+Podemos resolver el problema de la carga del condensador, empleando el código de la función de Euler incluido más arriba. Lo único que necesitamos es definir una función de Matlab  para representar la función $f(x,t)$ de nuestro problema de valor inicial, t
+\begin{lstlisting}
 function s=condensador(~,Vo)
-%t tiempo en este ejemplo la función no depende del tiempo por lo que esta
-%variable realmente no se usa... pero como el programa Euler se la pasa, 
-%empleamos el simbolo ~ para que no de errores...
-%Vo Valor del voltaje en cada iteración
+% t tiempo en este ejemplo la función no depende del tiempo por lo que esta
+% variable realmente no se usa... pero como el programa Euler se la pasa, 
+% empleamos el simbolo ~ para que no de errores...
+% Vo Valor del voltaje en cada iteración
 
-%hay que definir los parametros fijos del circuito...
-C=0.0001; %Capacidad del condesador en Faradios
-R=1000; %resitencia en Ohmios
-%el voltaje de entrada podría Vi podria ser una función del tiempo... Aquí
-%vamos a considerar que es constante...
-Vi=10; %Voltaje suministrado al circuito en Voltios
-%Aqui cosntruimos la funcion que representa el circuito RC,
+% hay que definir los parametros fijos del circuito...
+C=0.0001; % Capacidad del condesador en Faradios
+R=1000; % resitencia en Ohmios
+% el voltaje de entrada podría Vi podria ser una función del tiempo... Aquí
+% vamos a considerar que es constante...
+Vi=10; % Voltaje suministrado al circuito en Voltios
+% Aqui cosntruimos la funcion que representa el circuito RC,
 
 s=(Vi-Vo)/R/C;
-\end{verbatim}
+\end{lstlisting}
 
 \begin{figure}[h]
 \centering
@@ -705,18 +704,18 @@ x_{i+1}&=x_i+h\cdot f(t_i+\frac{h}{2},x_i+\frac{h}{2}f(t_i,x_i))\\
 \end{align*}
 La siguiente función de Matlab implementa el método del punto medio,
 
-\begin{verbatim}
+\begin{lstlisting}
 function y=pmedio(fun,ya,a,b,h)
-%metodo de rungekutta de segundo orden mas conocido como del punto medio
-%uso: y=pmedio(fun,ya,a,b,h)
-% variables de entrada: fun, nombre entre comillas de la función que define
-% el problema de valor inicial que se desea resolver. ya, valor inicial. a,
+% metodo de rungekutta de segundo orden mas conocido como del punto medio
+% uso: y=pmedio(fun,ya,a,b,h)
+%  variables de entrada: fun, nombre entre comillas de la función que define
+%  el problema de valor inicial que se desea resolver. ya, valor inicial. a,
 % instante de tiempo inicial o valor inicial de la variable independiente.
 % b valor de tiempo final o valor final de la variable independiente. h,
 % paso de integracion
-%podemos por elemental prudencia, comprobar que b>a
-%lo elegante no es pasar el paso como he hecho aqui, sino calcularlo en
-%funcion de cuantos puntos de la solucion queremos en el intervalo...
+% podemos por elemental prudencia, comprobar que b>a
+% lo elegante no es pasar el paso como he hecho aqui, sino calcularlo en
+% funcion de cuantos puntos de la solucion queremos en el intervalo...
 if a>=b
     y='el intervalo debe ser creciente, para evitarse lios'
     return
@@ -729,10 +728,10 @@ while t(paso)<=b
     y(paso+1)=y(paso)+h*feval(fun,t(paso)+h/2,y(paso)+h*feval(fun,t(paso),y(paso))/2);
     paso=paso+1;
 end
-%pintamos la solucion,
+% pintamos la solucion,
 plot(t,y)
 
-\end{verbatim}
+\end{lstlisting}
 
 
 El resto de los métodos de Runge-Kutta, los dejaremos para cuando seáis más mayores... Pero que conste que es de lo más interesante de los métodos numéricos.
@@ -802,6 +801,18 @@ Añade al programa realizado en el apartado \ref{ap:4b} el código necesario para 
 
 \item Compara gráficamente los resultados para la posición y velocidad obtenidas a partir de las ecuaciones exacta y aproximada para un péndulo de longitud $l=0.1m$. Si parte del reposo con ángulos iniciales $\theta_0$, $\pi/10, pi/6, pi/4, pi/3$. Emplea para la integración un intervalo de tiempo de $t_f-t_0 = 1s$ y un paso de integración $\Delta t=1e-3$
 \end{enumerate}
+\item La dinámica de un planeta que gira en torno a una estrella viene dada por las siguiente ecuaciones del movimiento,
+\begin{align*}
+\frac{d^2x}{dt^2} &= G\frac{M}{(x^2+y^2)^{3/2}}x\\
+\frac{d^2y}{dt^2} &= G\frac{M}{(x^2+y^2)^{3/2}}y
+\end{align*}
+Donde $G$ es la constante universal de la gravedad, $M$ la masa de la estrella, que se encuentra situada en el origen del coordenadas, y $(x,y)$ las coordenadas del vector posición del planeta.
+\begin{enumerate}
+\item transforma las ecuaciones del movimiento en un sistema de cuatro ecuaciones de primer orden, empleando la velocidad del planeta, $v_x = \frac{dx}{dt},\ v_y = \frac{dy}{dt} $. 
+\item Escribe un programa que permita obtener la trayectoria (órbita) de un planeta resolviendo mediante el método de Euler las ecuaciones obtenidas en el apartado anterior.
+\item Obtén la trayectoria (órbita) de un planeta que gira en torno a una estrella, empleando los siguientes datos, medidos en unidades arbitrarias: Masa de la estrella:$M=1$. Constante de la gravedad $G=1$. Posición inicial del planeta: $x_0 = 1$, $y_0=0$. Velocidad inicial $v_x = 0$, $v_y = 0.7$. Emplea un paso de integración $\Delta t =0.01$. Calcula la solución durante un tiempo total $t = 10$.
+\end{enumerate}
+\textbf{Nota:} El método de Euler no es suficientemente preciso para resolver este tipo de problemas. Es fácil obtener resultados muy alejados de la realidad en función del valor que tomen las condiciones iniciales. 
 \end{enumerate}
 
 \section{Test del curso 2020/21}
