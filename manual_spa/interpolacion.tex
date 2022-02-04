@@ -214,7 +214,7 @@ a_n
 
 \end{pmatrix}=\begin{pmatrix}
 y_0\\
-y_2\\
+y_1\\
 \vdots\\
 y_n
 \end{pmatrix}
@@ -918,13 +918,13 @@ y&$y_1$&$y_2$&$\cdots$&$y_m$
  
 Queremos construir un polinomio $p(x)$  de grado $n < m-1$, de modo que los valores que toma el polinomio para los datos $p(x_i)$ sean lo más cercanos posibles a los correspondientes valores $y_i$. 
 
-En primer lugar, necesitamos clarificar qué entendemos por \emph{lo mas cercano posible}.  Una posibilidad, es medir la diferencia, $y_i-p(x_i)$ para cada par de datos del conjunto. Sin embargo, es más frecuente emplear el cuadrado de dicha diferencia, $\left(y_i-p(x_i)\right)^2$. Esta cantidad tiene, entre otras, la ventaja de que su valor es siempre positivo con  independencia de que la diferencia sea positiva o negativa. Además, representa el cuadrado de la distancia entre $p(x_i)$ e $y_i$. Podemos tomar la suma de dichas distancias al cuadrado, obtenidas por el polinomio para todos los pares de puntos, 
+En primer lugar, necesitamos clarificar qué entendemos por \emph{lo más cercano posible}.  Una posibilidad, es medir la diferencia, $y_i-p(x_i)$ para cada par de datos del conjunto. Sin embargo, es más frecuente emplear el cuadrado de dicha diferencia, $\left(y_i-p(x_i)\right)^2$. Esta cantidad tiene, entre otras, la ventaja de que su valor es siempre positivo con  independencia de que la diferencia sea positiva o negativa. Además, representa el cuadrado de la distancia entre $p(x_i)$ e $y_i$. Podemos tomar la suma de dichas distancias al cuadrado, obtenidas por el polinomio para todos los pares de puntos, 
 
 \begin{equation*}
 \sum_{i=1}^m \left(y_i-p(x_i)\right)^2
 \end{equation*}
 
-como una medida de la distancia del polinomio a los datos.  De este modo,  el polinomio \emph{lo mas cercano posible}  a los datos sería aquel que minimice la suma de diferencias al cuadrado que acabamos de definir. De ahí el nombre del método.
+como una medida de la distancia del polinomio a los datos.  De este modo,  el polinomio \emph{lo más cercano posible}  a los datos sería aquel que minimice la suma de diferencias al cuadrado que acabamos de definir. De ahí el nombre del método.
 
 En muchos casos, los datos a los que se pretende ajustar un polinomio por mínimos cuadrados son datos experimentales. En función del entorno experimental y del método con que se han adquirido los datos, puede resultar que algunos resulten más fiables que otros. En este caso, sería deseable hacer que el polinomio se aproxime más a los datos más fiables. Una forma de hacerlo es añadir unos \emph{pesos}, $\omega_i$, a las diferencias al  cuadrado en función de la confianza que nos merece cada dato,
 

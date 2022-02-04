@@ -306,7 +306,7 @@ que coincide con el área del trapecio mostrado en la figura.
 I(y)=\int_{x_0}^{x_n}ydx \approx \sum_{i=0}^{n-1}\int_{x_i}^{x_{i+1}}y(x)dx=\sum_{i=0}^{n-1}\frac{h}{2}(y_i+y_{i+1})=\frac{h}{2}\left(y_0+2y_1+2y_2+\cdots+2y_{n-1}+y_n \right)
 \end{equation*}
 
-La figura \ref{fig:trapecio2}, muestra el resultado de aplicar la fórmula extendida del trapecio a la misma función de la figura \ref{fig:trapecio}. En este caso, se ha dividido el intervalo de integración en cuatro subintervalos. Es inmediato observar a partir de la figura, que la aproximación mejorar progresivamente si se aumenta el número de subintervalos y se reduce el tamaño de los mismos.
+La figura \ref{fig:trapecio2}, muestra el resultado de aplicar la fórmula extendida del trapecio a la misma función de la figura \ref{fig:trapecio}. En este caso, se ha dividido el intervalo de integración en cuatro subintervalos. Es inmediato observar a partir de la figura, que la aproximación mejorará progresivamente si se aumenta el número de subintervalos y se reduce el tamaño de los mismos.
 
 \begin{figure}[h]
 \centering
@@ -503,7 +503,7 @@ Donde suponemos conocida la posición inicial $x(0)$.
 Quizá el sistema físico idealizado más conocido y estudiado es el oscilador armónico. En este caso, el sistema está sometido a una fuerza que depende de la posición y, si existe disipación, a una fuerza que depende de la velocidad,
 
 \begin{equation*}
-m\frac{d^2x}{dt}=-kx-\mu \frac{dx}{dt}+F(t)
+m\frac{d^2x}{dt}=-kx-\mu \frac{dx}{dt}
 \end{equation*}
 
 En este caso, la expresión obtenida constituye una ecuación diferencial ordinaria y ya no es tan sencillo obtener una expresión analítica para x(t). Para obtener dicha expresión analítica, es preciso emplear métodos de resolución de ecuaciones diferenciales.
@@ -552,12 +552,18 @@ x_{i+1}&=x_i+hf(a+ih,x_i)
 El siguiente código implementa el método de Euler para resolver un problema de condiciones iniciales de primer orden a partir de una función $f(t)$ y un valor inicial $x_0$.
 
 \begin{lstlisting}
-% inicial o valor inicial de la variable independiente (t). 
-% b, instante de tiempo final o valor final de la variable independiente
-% h paso de integración
-% podemos por elemental prudencia, comprobar que b>a
-% lo elegante no es pasar el paso como he hecho aqui, sino tcalcularlo en
-% funcion de cuantos puntos de la solucion queremos en el intervalo...
+function y=euler(fun,ya,a,b,h)
+% implimentacion del metodo de Euler para resolver el problema y'(t)=f(y,t)
+% con condición inicial ya
+%Uso: y=euler(fun,ya,a,b,h)
+%variables de entrada: fun, debe contener el nombre de una función (sera la
+%función f) entrecomillas. ya, condición inicial. a, instante de tiempo 
+%inicial o valor inicial de la variable independiente (t). 
+%b, instante de tiempo final o valor final de la variable independiente
+%h paso de integración
+%podemos por elemental prudencia, comprobar que b>a
+%lo elegante no es pasar el paso como he hecho aqui, sino calcularlo en
+%funcion de cuantos puntos de la solucion queremos en el intervalo...
 if a>=b
     y='el intervalo debe ser creciente, para evitarse lios';
     return
@@ -803,8 +809,8 @@ Añade al programa realizado en el apartado \ref{ap:4b} el código necesario para 
 \end{enumerate}
 \item La dinámica de un planeta que gira en torno a una estrella viene dada por las siguiente ecuaciones del movimiento,
 \begin{align*}
-\frac{d^2x}{dt^2} &= G\frac{M}{(x^2+y^2)^{3/2}}x\\
-\frac{d^2y}{dt^2} &= G\frac{M}{(x^2+y^2)^{3/2}}y
+\frac{d^2x}{dt^2} &= -G\frac{M}{(x^2+y^2)^{3/2}}x\\
+\frac{d^2y}{dt^2} &= -G\frac{M}{(x^2+y^2)^{3/2}}y
 \end{align*}
 Donde $G$ es la constante universal de la gravedad, $M$ la masa de la estrella, que se encuentra situada en el origen del coordenadas, y $(x,y)$ las coordenadas del vector posición del planeta.
 \begin{enumerate}
@@ -841,7 +847,7 @@ Sobre un plano inclinado se coloca un bloque sujeto por un muelle, tal y como mu
 
 El movimiento del bloque en la dirección del plano puede determinarse mediante la ecuación
 \begin{equation}
-	ma(t) = -kx(t) -\mu v_x(t) + p_x, \label{eq: f}
+	ma_{x}(t) = -kx(t) -\mu \lvert N \lvert v_x(t) + p_x, \label{eq: f}
 \end{equation}
 donde $a(t)\in\mathbb{R}$ representa la aceleración del bloque, $x(t)\in\mathbb{R}$ su posición y el resto constantes se describen en la Figura \ref{fig1}. El origen, $x=0$, se toma en el punto en donde la fuerza recuperadora del muelle es nula. La posición crece en el sentido de bajada a lo largo del plano.
 
