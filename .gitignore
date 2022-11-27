@@ -16,6 +16,8 @@
 *.pdf
 !lcc_manual.pdf
 *~
+*.ilg
+*.ind
 *.swp
 *.swo
 *.d
