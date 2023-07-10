@@ -861,7 +861,7 @@ x =
 >>y= polyval(coef,x)
 y =
     26
->> x=[1:10]
+>> x=[1:10]º
 x =
      1     2     3     4     5     6     7     8     9    10
 >> y=polyval(coef,x)
@@ -889,9 +889,79 @@ p =
      1     1    -2
 \end{verbatim}
 
+\section{Cálculo de raices con la precisión máxima}
+Como ya se vio en la sección \ref{errn} todos los números que empleamos en un ordenador están sometidos a errores a causa del tamaño finito de los registros empleados para guardarlos. Cualquier número que queramos representar ha de aproximarse por un número máquina. Por lo tanto, en vez de buscar la aproximación a la raiz de una función con una tolerancia dada, podemos hallarla con la máxima precisión que nos permita la representación numérica empleada. Esta precisión máxima está relacionada con el \texttt{epsilon} del computador ya que la distancia entre dos números consecutivos es el épsilon multiplicado por dos elevado al exponente del número. De esta manera, por muchas iteraciones que hagamos la mejor aproximación que vamos a poder obtener de una raiz la obtendremos cuando el intervalo en el que se busca la raiz queda reducido a \texttt{eps} y por lo tanto no es posible reducirlo aún más. 
+
+En Matlab el comando  \texttt{eps} nos devuelve justo esa distancia entre dos números de coma flotante consecutivos:
+
+\begin{verbatim}
+>> eps(1)
+
+ans =
+
+2.220446049250313e-16
+
+>> eps(1e10)
+
+ans =
+
+1.907348632812500e-06
+
+>> eps(1e-10)
+
+ans =
+
+1.292469707114106e-26
+
+\end{verbatim}
+
+Podemos usar \texttt{eps} para establecer la condición de parada de los algoritmos de búsqueda de raices. Para el caso del método de la bisección se puede modificar el diagrama de flujo según se indica en la figura \ref{fig:dfbisecprecmax}
+	
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+	%\usetikzlibrary{shapes.geometric}
+	\path (5,0) node(a) [rectangle,draw=blue, very thick,align=center,rounded corners]{Partimos de $[a,b]$\\ con\\ $f(a)\cdot f(b)<0$}
+	(5,-2) node(b)[rectangle,draw=blue, thick,rounded corners]{Calculamos $c=\frac{a+b}{2}, f(c)$}
+	(5,-4) node(c)[diamond,aspect=3,draw=red,thick]{es $\vert a-b \vert < \text{eps(a)}$?}
+	(9,-4) node(d)[rectangle,draw=blue,align=center,very thick, rounded corners]{convergencia:\\ terminar}
+	(5,-6) node(e)[diamond,aspect=3,draw=red,thick]{es $f(a)\cdot f(c) < 0$?}
+	(9.5,-6) node(f)[rectangle,draw=blue,thick,rounded corners,align=center]{$b=c$\\$f(b)=f(c)$}
+	(5,-8) node(g)[rectangle,draw=blue,thick,rounded corners,align=center]{$a=c$\\$f(a)=f(c)$};
+	\draw[blue,-latex](a.south)--(b);
+	\draw[blue,-latex](b.south)--(c);
+	\draw[blue,-latex](c.east)--(d);
+	\draw (7.5,-4)node[above]{Sí};
+	\draw[blue,-latex](c.south)--(e);
+	\draw (5,-5)node[right]{No};
+	\draw[blue,-latex](e.east)--(f);
+	\draw (8,-6)node[above]{Sí};
+	\draw[blue,-latex](e.south)--(g);
+	\draw (5,-7.2)node[right]{No};
+	\draw[blue,-latex](g.south)|-(2,-9)|-(b);
+	\draw[blue,-latex](f.east)-|(11,-2)--(b);
+	\end{tikzpicture}
+	\caption{Diagrama de flujo del método de la bisección con precisión máxima}
+	\label{fig:dfbisecprecmax}
+\end{figure}
+
+Es más, en el método de la bisección se puede calcular en función del intervalo inicial el número de iteraciones necesario para alcanzar la máxima precisión, puesto que en cada iteración el intervalo se reduce a la mitad. Si llamamos $d$ al intervalo de partida $d=\vert a-b \vert$, en la iteración $n$ la longitud del intervalo será $\frac{d}{2^{n-1}}$. Se alcanzará el intervalo mínimo posible cuando su longitud sea la de \texttt{eps}. Pero según se explicaba en la sección \ref{errn} el valor de \texttt{eps} es igual a $2$ elevado al número de bits de la mantisa. En el caso de un número de doble precisión la mantisa tiene $52$ bits y por lo tanto:
+
+\begin{equation*}
+\frac{\vert d \vert}{2^{n-1}}<2^{-52} 
+\end{equation*}
+
+Y despejando y tomando logaritmos:
+
+\begin{equation*}
+n > \log_{2}(\vert d \vert)+53
+\end{equation*}
+
+Para métodos que no parten de un intervalo sino de un punto inicial, como el de Newton-Raphson o el del punto fijo también puede buscarse la raiz empleando \texttt{eps}, de manera que se alcanzará la precisión máxima cuando el intervalo comprendido entre dos soluciones obtenidas en iteraciones consecutivas sea del tamaño de \texttt{eps}. 
+
 \section{Ejercicios}
 \begin{enumerate}
-\item Crea una función en matlab que implemente el método de  la bisección para obtener la raíz de una función cualquiera $y = f(x)\vert\  x, y \in \mathbb{R}$. La función deberá admitir como variables de entrada, la función $f(x)$, un intervalo de búsqueda $[a,b]$, un número máximo de iteraciones, $nmax$, a realizar y la tolerancia $tol$ o error máximo admisible para la solución obtenida. Así mismo la función deberá devolver como como variables de salida, el valor aproximado obtenido para la raíz $r$, el error cometido $f(r)$ y el número de iteraciones empleado para alcanzar la solución.
+\item Crea una función en matlab que implemente el método de  la bisección para obtener la raíz de una función cualquiera $y = f(x)\vert\  x, y \in \mathbb{R}$. La función deberá admitir como variables de entrada, la función $f(x)$, un intervalo de búsqueda $[a,b]$, un número máximo de iteraciones, $nmax$, a realizar y la tolerancia $tol$ o error máximo admisible para la solución obtenida. Así mismo la función deberá devolver como como variables de salida, el valor aproximado obtenido para la raíz $r$, el error cometido $f(r)$ y el número de iteraciones empleado para alcanzar la solución. 
 
 Aplica el programa creado a la función de ejemplo empleada empleada en el manual, $f(x) = e^x-x^2$, para comprobar que funciona correctamente.
 

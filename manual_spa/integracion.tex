@@ -666,6 +666,13 @@ Como era de esperar, al hacer menor el paso de integración la solución numérica 
 m\frac{d^2 y}{dt^2}=m\cdot g-k \cdot y-\mu \frac{dy}{dt}
 \end{equation*}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=6cm]{figura_amortiguador.pdf}
+	\caption{Masa suspendida en vertical de un muelle con rozamiento.}
+	\label{fig:masa_suspendida}
+\end{figure}
+
 Tenemos un problema de valor inicial de segundo orden, con una ecuación en la que conviven la variable $y$ su derivada $\frac{dy}{dt}$ y su derivada segunda $\frac{d^2y}{dt^2}$. Para resolver este tipo de problemas lo que hacemos es reescribir la ecuación como dos ecuaciones de primer orden, una para la posición $y$ y otra para la velocidad $v_y=\frac{dy}{dt}$ de manera que obtendríamos un sistema de dos ecuaciones de primer orden acopladas:
 
 \begin{align*}
