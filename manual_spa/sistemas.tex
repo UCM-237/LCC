@@ -1314,7 +1314,7 @@ Los métodos iterativos se basan en una aproximación distinta al problema de la r
 \begin{tikzpicture}
 %\usetikzlibrary{shapes.geometric}
 \path (5,0) node(a) [rectangle,draw=blue, very thick,align=center,rounded corners]{Solución inicial $x^{(s)}=x^{(0)}$}
-(5,-2) node(b)[rectangle,draw=blue, thick,rounded corners,align=center]{Calculamos\\ $x^{(s+1)}=M(x^{(s)}$}
+(5,-2) node(b)[rectangle,draw=blue, thick,rounded corners,align=center]{Calculamos\\ $x^{(s+1)}=M(x^{(s)})$}
 (5,-4) node(c)[diamond,aspect=3,draw=red,thick]{es $\lVert  x^{(s+1)}-x^{(s)} \rVert \le \text{tol}$?}
 (9.5,-4) node(d)[rectangle,draw=blue,align=center,very thick, rounded corners]{convergencia:\\ terminar}
 (5,-6) node(g)[rectangle,draw=blue,thick,rounded corners,align=center]{$x^{(s)}=x^{(s+1)}$};
@@ -2165,12 +2165,12 @@ Por tanto, el sistema converge si el radio espectral de la matriz del método es 
 \paragraph{Velocidad de convergencia.} \index{Velocidad de convergencia}Para un número de iteraciones suficientemente grande, el radio espectral de la matriz del método nos da la velocidad de convergencia. Esto es debido a que el resto de los términos del error, asociados a otros autovalores más pequeños tienden a cero más  deprisa. Por tanto podemos hacer la siguiente aproximación, donde estamos suponiendo que el autovalor $\lambda_n$ es el radio espectral,
 
 \begin{equation*}
-e^{(s)}\approx c_n \rho(h)^s w_n= c_n \lambda_n^s w_n
+e^{(s)}\approx c_n \rho(H)^s w_n= c_n \lambda_n^s w_n
 \end{equation*}
 
 Podemos ahora calcular cuantas iteraciones nos costará reducir un error inicial por debajo de un determinado valor. Esto dependerá de la solución inicial y de radio espectral de la matriz del método,
 \begin{equation*}
-e^{(s)}\approx  \rho(h)^s e^{(0)} \Rightarrow \frac{e^{(s)}}{e^{(0)}} \approx \rho(h)^s
+e^{(s)}\approx  \rho(H)^s e^{(0)} \Rightarrow \frac{e^{(s)}}{e^{(0)}} \approx \rho(H)^s
 \end{equation*}
 
 así por ejemplo si queremos reducir el error inicial en $m$ dígitos,
@@ -2242,7 +2242,7 @@ radio_espectral =
 
 El radio espectral es mayor que la unidad y el método no converge.
 
-SI repetimos el cálculo para el método de Jacobi amortiguado, con $\omega=0.5$
+Si repetimos el cálculo para el método de Jacobi amortiguado, con $\omega=0.5$
 \begin{verbatim}
 >> H=(1-0.5)*eye(3)-0.5*diag(diag(A))^-1*(A-diag(diag(A)))
 

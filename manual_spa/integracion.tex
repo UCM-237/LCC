@@ -202,7 +202,7 @@ $y'_0=\frac{y_1-y_0}{h}+O(h)$ & $y''_0=\frac{y_2-2y_1+y_0}{h^2}+O(h)$\\
 \ & \\
 $y'_0=\frac{y_1-y_{-1}}{2h}+O(h^2)$ &$y''_0=\frac{y_1-2y_0+y_{-1}}{h^2}$\\
 \ & \\
-$y'_0=\frac{-y_2+4y_1-3y_0}{2h}+O(h^2)$ &$y''_0=\frac{-y_3+4y_2-5y_1+2y_0}{h^2}+O(h^2)$\\
+$y'_0=\frac{-y_2+4y_1-3y_0}{2h}+O(h^2)$ &$y''_0=\frac{-y_3+y_2-5y_1+2y_0}{h^2}+O(h^2)$\\
 \ & \\
 $y'_0=\frac{-y_2+8y_1-8y_{-1}+y_{-2}}{12h}+O(h^4)$ &$y''_0=\frac{-y_2+16y_1-30y_0+16y_{-1}-y_{-2}}{12h^2}+O(h^4)$\\
 \ & \\
@@ -503,7 +503,7 @@ Donde suponemos conocida la posición inicial $x(0)$.
 Quizá el sistema físico idealizado más conocido y estudiado es el oscilador armónico. En este caso, el sistema está sometido a una fuerza que depende de la posición y, si existe disipación, a una fuerza que depende de la velocidad,
 
 \begin{equation*}
-m\frac{d^2x}{dt}=-kx-\mu \frac{dx}{dt}
+m\frac{d^2x}{dt^2}=-kx-\mu \frac{dx}{dt}
 \end{equation*}
 
 En este caso, la expresión obtenida constituye una ecuación diferencial ordinaria y ya no es tan sencillo obtener una expresión analítica para x(t). Para obtener dicha expresión analítica, es preciso emplear métodos de resolución de ecuaciones diferenciales.
@@ -555,6 +555,8 @@ El siguiente código implementa el método de Euler para resolver un problema de c
 function y=euler(fun,ya,a,b,h)
 % implimentacion del metodo de Euler para resolver el problema y'(t)=f(y,t)
 % con condición inicial ya
+% Admite funciones sobre un vector de variables, en ese caso las
+% condiciones iniciales serán también un vector
 %Uso: y=euler(fun,ya,a,b,h)
 %variables de entrada: fun, debe contener el nombre de una función (sera la
 %función f) entrecomillas. ya, condición inicial. a, instante de tiempo 
@@ -565,19 +567,20 @@ function y=euler(fun,ya,a,b,h)
 %lo elegante no es pasar el paso como he hecho aqui, sino calcularlo en
 %funcion de cuantos puntos de la solucion queremos en el intervalo...
 if a>=b
-    y='el intervalo debe ser creciente, para evitarse lios';
-    return
+y='el intervalo debe ser creciente, para evitarse lios';
+return
 end
 y=ya;
 paso=1;
 t(paso)=a;
 while t(paso)<=b
-    t(paso+1)=t(paso)+h;
-    y(paso+1)=y(paso)+h*feval(fun,t(paso),y(paso));
-    paso=paso+1;
+t(paso+1)=t(paso)+h;
+y(paso+1,:)=y(paso,:)+h*feval(fun,t(paso),y(paso,:));
+paso=paso+1;
 end
-% dibuja la solucion,
+%dibuja la solucion,
 plot(t,y)
+
 \end{lstlisting}
 
 Un ejemplo sencillo de problema de condiciones iniciales de primer orden, nos los suministra la ecuación diferencial de la carga y descarga de un condensador eléctrico. La figura \ref{fig:RC}, muestra un circuito eléctrico elemental formado por una resistencia $R$ en serie con un condensador $C$. \index{Circuito RC}
@@ -657,6 +660,64 @@ La figura \ref{fig:solrc} compara gráficamente los resultados obtenido si emplea
 En primer lugar, es interesante observar como el voltaje $V_0$ crece hasta alcanzar el valor $V_i=10$ V del voltaje suministrado al circuito. El tiempo que tarda el condensador en alcanzar dicho voltaje y quedar completamente cargado depende de su capacidad y de la resistencia presente en el circuito.
 
 Como era de esperar, al hacer menor el paso de integración la solución numérica se aproxima más a la solución analítica. Sin embargo, como pasaba en el caso de los métodos de diferenciación de funciones, hay un valor de $h$ óptimo. Si disminuimos el paso de integración por debajo de ese valor, los errores de redondeo empiezan a dominar haciendo que la solución empeore.
+
+\paragraph{Problema de segundo orden.} Vamos a considerar ahora un sistema con una masa colgada de un resorte con un dispositivo mecánico (amortiguador) que ejerce una fuerza opuesta al movimiento proporcional a la velocidad. En este caso la ecuación diferencial sería la siguiente:
+\begin{equation*}
+m\frac{d^2 y}{dt^2}=m\cdot g-k \cdot y-\mu \frac{dy}{dt}
+\end{equation*}
+
+Tenemos un problema de valor inicial de segundo orden, con una ecuación en la que conviven la variable $y$ su derivada $\frac{dy}{dt}$ y su derivada segunda $\frac{d^2y}{dt^2}$. Para resolver este tipo de problemas lo que hacemos es reescribir la ecuación como dos ecuaciones de primer orden, una para la posición $y$ y otra para la velocidad $v_y=\frac{dy}{dt}$ de manera que obtendríamos un sistema de dos ecuaciones de primer orden acopladas:
+
+\begin{align*}
+\frac{dy}{dt}&=v_y \\
+\frac{dv_y}{dt}&=g-\frac{k}{m}\cdot y - \frac{\mu}{m}\cdot v_y 
+\end{align*}
+
+Ese sistema de ecuaciones de primer orden se puede resolver usando el método de Euler. Necesitamos definir una función de Matlab para representar el sistema de ecuaciones diferenciales
+
+\begin{lstlisting}
+function [dydt] = amortiguador(~,y)
+% y(1) posición
+% y(2) velocidad
+% k constante del muelle
+% mu coeficiente de rozamiento
+% g aceleración de la gravedad
+% m masa
+g=9.8;
+k=10.0;
+m=2.0;
+mu=0.5;
+dydt(1)=y(2);
+dydt(2)=g-(k/m)*y(1)-(mu/m)*y(2);
+end
+\end{lstlisting}
+
+Empleando la función descrita \texttt{euler('amortiguador',[0 0],0,50,0.01)} obtenemos la evolución temporal de la posición y la velocidad de la masa unida al resorte como puede verse en la figura \ref{fig:amortiguador1}. En esta figura se aprecia como la masa oscila en torno a la posición de equilibrio hasta que finalmente se para.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=12cm]{amortiguador_1.png}
+	\caption{Resultado de aplicar el método de Euler a una masa suspendida en vertical de un muelle con rozamiento.}
+	\label{fig:amortiguador1}
+\end{figure}
+
+Si cambiamos el valor de la constante del muelle a $k=100$ ($kg/s^2$) y volvemos a aplicar el método de Euler para resolver obtenemos el resultado mostrado en la figura \ref{fig:amortiguador2}. En la gráfica puede observarse que la masa comienza a oscilar con oscilaciones de amplitud creciente. Para analizar este comportamiento anómalo vamos a repetir el método de Euler reduciendo en un orden de magnitud el paso de integración. Si lo hacemos así obtenemos los resultados de la figura \ref{fig:amortiguador3}. Al reducir el paso vemos que la masa oscila en torno a la posición de equilibrio hasta que se estabiliza. El comportamiento observado en la figura \ref{fig:amortiguador2} se debe a errores de integración del algoritmo de Euler.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=12cm]{amortiguador_2.png}
+	\caption{Resultado de aplicar el método de Euler a una masa suspendida en vertical de un muelle con rozamiento $k=100$.}
+	\label{fig:amortiguador2}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=12cm]{amortiguador_3.png}
+	\caption{Resultado de aplicar el método de Euler a una masa suspendida en vertical de un muelle con rozamiento $k=100$ y paso $h=0.001$.}
+	\label{fig:amortiguador3}
+\end{figure}
+
+En la práctica se emplean algoritmos más precisos (y complejos) que el de Euler para resolver problemas de valor inicial, por ejemplo los métodos de Runge-Kutta.
 
 \subsection{Métodos de Runge-Kutta} \index{Método de Runge-Kutta}
 Si intentamos emplear polinomios de Taylor de grado superior, al empleado en el método de Euler, nos encontramos con la dificultad de obtener las derivadas sucesivas, con respecto al tiempo, de la función $f$. Así, si quisiéramos emplear el polinomio de Taylor de segundo grado, para la función x, tendríamos,
